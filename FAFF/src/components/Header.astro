@@ -1,0 +1,116 @@
+---
+const navItems = [
+  { name: 'Foods', href: '/foods' },
+  { name: 'Amusements', href: '/amusements' },
+  { name: 'Upcoming Events', href: '/upcoming' },
+  { name: 'About Us', href: '/about' },
+];
+const leftItems = navItems.slice(0, 3);
+const rightItems = navItems.slice(3);
+---
+
+<div class="header">
+  <nav class="header-item nav-items-left" aria-label="Primary navigation">
+    {
+      leftItems.map((item) => (
+        <a href={item.href} data-name={item.name}>
+          {item.name}
+        </a>
+      ))
+    }
+  </nav>
+
+  <div class="header-item logo">
+    <a href="/"
+      ><img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
+    </a>
+  </div>
+  <nav class="header-item nav-items-right" aria-label="Secondary navigation">
+    {
+      rightItems.map((item) => (
+        <a href={item.href} data-name={item.name}>
+          {item.name}
+        </a>
+      ))
+    }
+
+    <a class="contact-button" href="/contact">Contact</a>
+  </nav>
+
+  <style>
+    .header {
+      font-family: var(--comfortaa);
+      font-size: 1.5rem;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+    .header-item {
+      display: flex;
+      align-items: center;
+    }
+    .nav-items-left,
+    .nav-items-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+    }
+    a {
+      text-decoration: none;
+      color: #fff;
+      padding: 0.5em;
+      margin: 1em;
+    }
+
+    a[data-name='Foods'] {
+      text-shadow: 0 0 3px red;
+    }
+    @keyframes pulse {
+      0%,
+      100% {
+        text-shadow:
+          0 0 5px #fff,
+          0 0 10px red,
+          0 0 20px red,
+          0 0 40px red,
+          0 0 60px red;
+      }
+      50% {
+        text-shadow: none;
+      }
+    }
+    a[data-name='Foods']:hover {
+      animation: pulse 1.5s infinite alternate;
+      transform: scale(1.05); /* Physical "pop" */
+      transition: transform 0.2s;
+    }
+    a[data-name='Amusements'] {
+      text-shadow: 0 0 3px orange;
+    }
+    a[data-name='Upcoming Events'] {
+      text-shadow: 0 0 3px lightgreen;
+    }
+
+    a[data-name='About Us'] {
+      text-shadow: 0 0 3px navy;
+    }
+
+    img {
+      height: 100px;
+      width: auto;
+    }
+
+    .contact-button {
+      padding: 1em;
+      background-color: blue;
+      border-radius: 5px;
+    }
+  </style>
+</div>
