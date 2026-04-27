@@ -69,6 +69,7 @@ const rightItems = navItems.slice(3);
       width: auto;
     }
     @media (min-width: 600px) {
+
       .logo {
         position: absolute;
         top: 3vw;
@@ -78,6 +79,7 @@ const rightItems = navItems.slice(3);
         width: auto;
       }
     }
+    
 
     a {
       text-decoration: none;
@@ -87,40 +89,55 @@ const rightItems = navItems.slice(3);
     }
 
     a[data-name='Foods'] {
-      text-shadow: 0 0 3px red;
-    }
-    @keyframes pulse {
-      0%,
-      100%,
-      40%,
-      55%,
-      62% {
-        text-shadow:
-          0 0 5px #fff,
-          0 0 10px red,
-          0 0 20px red,
-          0 0 40px red,
-          0 0 60px red;
-      }
-      50%,
-      60% {
-        text-shadow: none;
-      }
+      --glow-color: red;
+      text-shadow: 0 0 5px var(--glow-color),
+          0 0 10px var(--glow-color),
+          0 0 20px var(--glow-color);
     }
     a[data-name='Foods']:hover {
-      animation: pulse 5s infinite alternate;
-      transform: scale(1.03); /* Physical "pop" */
-      transition: transform 0.2s;
+      animation: pulse 5s infinite;
     }
     a[data-name='Amusements'] {
-      text-shadow: 0 0 3px orange;
+      --glow-color: orange;
+      text-shadow: 0 0 5px var(--glow-color),
+          0 0 10px var(--glow-color),
+          0 0 20px var(--glow-color);
     }
+    a[data-name='Amusements']:hover {
+      animation: pulse 5s infinite;
+    }
+
     a[data-name='Upcoming Events'] {
-      text-shadow: 0 0 3px lightgreen;
+      --glow-color: rgb(0, 255, 0);
+      text-shadow: 0 0 5px var(--glow-color),
+          0 0 10px var(--glow-color),
+          0 0 20px var(--glow-color);
+    }
+    a[data-name='Upcoming Events']:hover {
+      animation: pulse 5s infinite;
     }
 
     a[data-name='About Us'] {
-      text-shadow: 0 0 3px navy;
+      --glow-color: rgb(0, 0, 255);
+      text-shadow: 0 0 5px var(--glow-color),
+          0 0 10px var(--glow-color),
+          0 0 20px var(--glow-color);
+    }
+    a[data-name='About Us']:hover {
+      animation: pulse 5s infinite;
+    }
+    @keyframes pulse {
+      0%, 74%, 79%,81%,100%{
+        text-shadow:
+          0 0 5px var(--glow-color, white),
+          0 0 10px var(--glow-color, white),
+          0 0 20px var(--glow-color, white),
+          0 0 40px var(--glow-color, white),
+          0 0 60px var(--glow-color, white);
+      }
+      75%,80%{
+        text-shadow: none;
+      }
     }
 
     .contact-button {

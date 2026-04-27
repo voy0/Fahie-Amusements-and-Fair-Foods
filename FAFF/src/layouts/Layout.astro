@@ -11,6 +11,8 @@ import { Font } from 'astro:assets';
     <!-- <link rel="icon" href="/fafficon.ico" /> -->
     <meta name="generator" content={Astro.generator} />
     <Font cssVariable="--comfortaa" preload />
+    <Font cssVariable="--coiny" preload />
+    
 
     <title>Fahie Amusements & Fair Foods</title>
   </head>
@@ -19,13 +21,29 @@ import { Font } from 'astro:assets';
   </body>
 </html>
 
-<style>
+<style is:global>
+  :root{
+    --faff-orange: rgb(236, 94, 26);
+    --faff-blue: rgb(37, 56, 112);
+    --bg-blue: rgb(18, 21, 43);
+  }
   html,
   body {
     background-color: black;
+    color: white;
     margin: 0;
-    width: 100%;
-    height: 100%;
+    padding: 0;
+    width: 100vw;
+    height: 100vw;
     font-size: 1vw;
   }
+
+  div{
+    font-family: var(--comfortaa)
+  }
+  @media (min-width: 1200px){
+      html{
+        font-size:clamp(8px, 0.9em,16px);
+      }
+    }
 </style>
