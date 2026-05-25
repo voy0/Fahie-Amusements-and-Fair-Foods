@@ -1,0 +1,183 @@
+---
+
+---
+
+<button class="button"
+  ><slot/>
+ 
+  <div class="top">
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+  </div>
+
+  <div class="left">
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+  </div>
+
+  <div class="right">
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+  </div>
+  <div class="bottom">
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+    <div class="bulb"></div>
+  </div>
+</button>
+
+<style>
+  :root {
+    --bulb-size: 0.4em;
+    --bulb-padding: 0.42em;
+    --bulb-offset: calc(var(--bulb-size) + 2 * var(--bulb-padding));
+    --glow-blue: rgb(104, 146, 255);
+    --glow-orange: rgb(255, 177, 60);
+    --glow-orange_sat: var(--faff-orange);
+    --glow-blue_sat: rgb(10, 50, 255);
+  }
+  .button {
+      font-weight: bold;
+      font-family: var(--comfortaa);
+      cursor: pointer;
+      position: relative;
+      font-size: 0.7em;
+      padding: 1.7em 2em;
+      margin: 1em;
+      background-color: var(--faff-blue);
+      color: white;
+      border-radius: 0.6em;
+      border: 0.1em solid var(--faff-orange);
+      box-shadow: 0 0 0.3em var(--faff-orange);
+    text-decoration: none;
+  }
+  @keyframes flash {
+    0%, 49% {
+      background-color: var(--glow-orange);
+      box-shadow:
+        0 0 3px var(--glow-orange_sat),
+        0 0 5px var(--glow-orange_sat),
+        0 0 5px var(--glow-orange_sat),
+        0 0 8px var(--glow-orange_sat),
+        0 0 8px var(--glow-orange_sat),
+        0 0 12px var(--glow-orange_sat),
+        0 0 12px var(--glow-orange_sat);
+
+    }
+    50%, 100% {
+      background-color: var(--glow-blue);
+      box-shadow:
+        0 0 3px var(--glow-blue_sat),
+        0 0 5px var(--glow-blue_sat),
+        0 0 5px var(--glow-blue_sat),
+        0 0 8px var(--glow-blue_sat),
+        0 0 8px var(--glow-blue_sat),
+
+        0 0 12px var(--glow-blue_sat),
+        0 0 12px var(--glow-blue_sat);
+
+    }
+  }
+  .button:hover{
+    transition: ease-in-out 0.2s;
+  }
+  .button:hover .bulb {
+    animation: flash 1s infinite;
+  }
+
+  .button:hover .bulb:nth-child(even) {
+    animation-delay: -0.5s; 
+  }
+
+  .button:hover .left .bulb:nth-child(even) {
+    animation-delay: 0s;
+  }
+  .button:hover .left .bulb:nth-child(odd) {
+    animation-delay: -0.5s;
+  }
+  .bulb {
+    min-width: var(--bulb-size);
+    max-width: var(--bulb-size);
+    min-height: var(--bulb-size);
+    max-height: var(--bulb-size);
+    width: var(--bulb-size);
+    height: var(--bulb-size);
+    border-radius: 50%;
+  }
+  .bulb:nth-child(odd) {
+    background-color: var(--glow-orange);
+    box-shadow:
+      0 0 3px var(--glow-orange_sat),
+      0 0 5px var(--glow-orange_sat),
+      0 0 8px var(--glow-orange_sat);
+  }
+  .bulb:nth-child(even) {
+    background-color: var(--glow-blue);
+    box-shadow:
+      0 0 3px var(--glow-blue_sat),
+      0 0 5px var(--glow-blue_sat),
+      0 0 8px var(--glow-blue_sat);
+  }
+
+  .left .bulb:nth-child(even) {
+    background-color: var(--glow-orange);
+    box-shadow:
+      0 0 3px var(--glow-orange_sat),
+      0 0 5px var(--glow-orange_sat),
+      0 0 8px var(--glow-orange_sat);
+  }
+  .left .bulb:nth-child(odd) {
+    background-color: var(--glow-blue);
+    box-shadow:
+      0 0 3px var(--glow-blue_sat),
+      0 0 5px var(--glow-blue_sat),
+      0 0 8px var(--glow-blue_sat);
+  }
+  .top,
+  .bottom {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+  }
+  .top {
+    top: var(--bulb-padding);
+    left: var(--bulb-padding);
+    right: var(--bulb-padding);
+  }
+  .bottom {
+    bottom: var(--bulb-padding);
+    left: var(--bulb-padding);
+    right: var(--bulb-padding);
+  }
+  .left,
+  .right {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: min-content;
+  }
+  .left {
+    top: var(--bulb-offset);
+    left: var(--bulb-padding);
+    bottom: var(--bulb-offset);
+  }
+  .right {
+    top: var(--bulb-offset);
+    right: var(--bulb-padding);
+    bottom: var(--bulb-offset);
+  }
+</style>

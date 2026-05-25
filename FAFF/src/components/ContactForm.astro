@@ -1,0 +1,77 @@
+---
+
+---
+
+<div class="wrapper">
+  <div class="headline">
+    <h2>Contact form</h2>
+    <span
+      >Fill out the information and reason for your inquiry below, and we'll
+      reach out to you.</span
+    >
+  </div>
+  <div class="fields-wrapper">
+    <div class="field-wrapper">
+      <div class="label">Name</div>
+      <div class="separator"></div>
+      <div class="textfield"><input type="text" name="name" id="name-tf" /></div>
+    </div>
+    <div class="field-wrapper">
+      <div class="label">E-mail</div>
+      <div class="separator"></div>
+      <div class="textfield">
+        <input type="text" name="email" id="email-tf" />
+      </div>
+    </div>
+    <div class="field-wrapper">
+      <div class="label">Phone</div>
+      <div class="separator"></div>
+      <div class="textfield">
+        <input type="number" name="number" id="number-tf" />
+      </div>
+    </div>
+    <div class="field-wrapper lg-field-wrapper">
+      <div class="label">What's it </br> about</div>
+      <div class="separator"></div>
+      <div class="textfield">
+        <input type="text" name="description" id="description-tf" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+    .wrapper{
+        width: 60em;
+        border-radius: 2em;
+        background-color: var(--faff-blue);
+    }
+    .fields-wrapper{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+    .field-wrapper{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        justify-content:space-around;
+        padding-top: 0.5em;
+        padding-bottom 1em;
+    }
+
+    
+    .separator{
+        margin-right: 0.5em;
+        height: 2em;
+        width: 0.5em;
+        border-right: 0.2em solid var(--faff-orange);
+    }
+    .textfield input{
+        text-decoration: none;
+        border: none;
+        margin: 1em;
+        background-color: var(--faff-darkblue);
+    }
+</style>
