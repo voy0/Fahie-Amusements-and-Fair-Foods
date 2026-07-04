@@ -2,7 +2,7 @@
 import ContactButton from './ContactButton.astro'
 
 ---
-<div class="wrapper">
+<div id="contact-form" class="wrapper">
   <div class="contact-container">
     <div class="form-column">
       <form class="contact-form" action="#" method="post" novalidate>
@@ -70,7 +70,7 @@ import ContactButton from './ContactButton.astro'
     --accent2: rgba(23, 27, 85, 0.349);
   }
   .wrapper{
-    width: 60%;
+    width: 40%;
     border-radius: 1.25rem;
     background-color: var(--faff-blue);
     background: linear-gradient(180deg, var(--accent1), var(--accent2));
@@ -110,7 +110,7 @@ import ContactButton from './ContactButton.astro'
   /* grid layout so inputs scale with column width */
   .field-wrapper{
     display: grid;
-    grid-template-columns: 20% 1.2rem 1fr;
+    grid-template-columns: 10% 1.2rem 1fr;
     align-items: start;
     gap: 0.6rem;
     padding: 0.25rem 0;
@@ -151,7 +151,7 @@ import ContactButton from './ContactButton.astro'
     min-width: 0;
   }
 
-  .textfield textarea{ max-width:100%; resize:vertical; }
+  .textfield textarea{ max-width:100%; resize:none; }
 
   .textfield input::placeholder,
   .textfield textarea::placeholder{
@@ -167,7 +167,7 @@ import ContactButton from './ContactButton.astro'
 
   .actions{ display:flex; justify-content:flex-end; margin-top:0.5rem; }
   /* adjust ContactButton spacing inside actions */
-  .actions :is(button, .button){
+  .actions :is(button, .button, a){
     margin: 0;
     font-size: 1.1em;
   }
