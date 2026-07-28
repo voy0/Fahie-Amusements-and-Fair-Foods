@@ -4,6 +4,8 @@ import { getImage } from 'astro:assets';
 
 import mobileBg from '../assets/hero-mobile.jpg';
 import desktopBg from '../assets/hero-desktop.jpg';
+import ContactForm from '../components/ContactForm.astro';
+
 
 const mobileImg = await getImage({ src: mobileBg, format: 'webp', width: 600 });
 const desktopImg = await getImage({
@@ -12,9 +14,7 @@ const desktopImg = await getImage({
   width: 1920,
 });
 ---
-
-<div class="hero-wrapper">
-  <div class="hero-background">
+<div class="hero-background">
   <picture class="hero-image">
     <source media="(max-width: 600px)" srcset={mobileImg.src} />
 
@@ -30,17 +30,59 @@ const desktopImg = await getImage({
   <div class="hero-gradient" id="hero-gradient1"></div>
   <div class="hero-gradient" id="hero-gradient2"></div>
   </div>
+<div class="hero-wrapper">
+  <div class="logo">
+    <a href="/"
+      ><img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
+    </a>
+  </div>
   <div class="tagline-container">
     <div class="tagline-wrapper">
     <h1 class="tagline">Real Carnival Experience </br>at Your Event</h1>
     <h3 class="subtext">Family owned show. </br> Just for <span>your</span> needs.</h3>
     </div>
   </div>
+
 </div>
 <style>  
 .hero-background{
-  position: fixed;
+  position: absolute;
+  inset: 0;
 }
+
+    .logo {
+      position: absolute;
+      top: 39vw;
+      left: 50%;
+      z-index: 200;
+      transform: translateX(-50%);
+    }
+
+    .logo a {
+      display: block;
+      transition: transform 0.2s ease;
+      transform-origin: center;
+    }
+
+    .logo a:hover {
+      transform: scale(1.05);
+    }
+
+    .logo img {
+      display: block;
+      height: 25vw;
+      width: auto;
+    }
+
+    @media (min-width: 600px) {
+      .logo {
+        top: 3vw;
+      }
+      .logo img {
+        height: 10vw;
+        width: auto;
+      }
+    }
 .tagline-container{
   position: inherit;
   top:0;
@@ -76,24 +118,52 @@ const desktopImg = await getImage({
 .subtext span{
   color: var(--faff-orange);
 }
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow-x: hidden;
+}
 .hero-image{
     display: block;
     width: 100%;
     height: 100%; 
   }
   @media (max-width: 600px) {
-    .tagline-container{
-      font-size: 3rem;
-      margin-top: 70%;
-      position: relative;
-      top: 50%;
+    .hero-wrapper {
+      height: 100vh;
+      height: 100svh;
+      overflow: hidden;
     }
-  }
-  .hero-wrapper {
-    position: relative; 
-    width: 100%; 
-    height: auto; 
-    overflow-x: hidden;
+
+    .hero-background {
+      inset: 0;
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
+    }
+
+    .tagline-container{
+      position: absolute;
+      inset: 0;
+      top: auto;
+      left: auto;
+      height: 100%;
+      margin-top: 0;
+      font-size: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   .hero-image{
     display: block;

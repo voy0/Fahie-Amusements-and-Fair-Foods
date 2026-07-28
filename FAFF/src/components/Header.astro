@@ -21,11 +21,7 @@ import ContactButton from './ContactButton.astro';
     }
   </nav>
 
-  <div class="header-item logo">
-    <a href="/"
-      ><img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
-    </a>
-  </div>
+  
   <nav class="header-item nav-items-right" aria-label="Secondary navigation">
     {
       rightItems.map((item) => (
@@ -62,25 +58,6 @@ import ContactButton from './ContactButton.astro';
       align-items: center;
     }
 
-    .logo {
-      position: absolute;
-      top: 39vw;
-    }
-
-    .logo img {
-      height: 25vw;
-      width: auto;
-    }
-
-    @media (min-width: 600px) {
-      .logo {
-        top: 3vw;
-      }
-      .logo img {
-        height: 10vw;
-        width: auto;
-      }
-    }
 
     a {
       position: relative;

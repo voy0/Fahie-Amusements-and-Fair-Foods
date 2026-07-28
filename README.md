@@ -4,6 +4,26 @@
 #FF89E4
 #35E1FF
 
+add banner with information on front page
+- corporate events
+- rentals
+- festivals
+- fairs
+- events
+
+foods and amusements with all of the joints and pictures and description in form of placards
+
+about us
+- history, picutres, in form of a blog post
+
+upcoming events
+- cms
+- date with descrition, map link
+
+contact us 
+- sending would send
+
+
 <picture>
   <source media="(max-width: 600px)" srcset="/images/hero-mobile.webp" />
   
