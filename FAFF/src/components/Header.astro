@@ -11,7 +11,7 @@ import ContactButton from './ContactButton.astro';
 ---
 
 <div class="header">
-  <nav class="header-item nav-items-left" aria-label="Primary navigation">
+  <nav class="header-item nav-items-left hide-on-mobile" aria-label="Primary navigation">
     {
       leftItems.map((item) => (
         <a href={item.href} data-name={item.name}>
@@ -22,7 +22,7 @@ import ContactButton from './ContactButton.astro';
   </nav>
 
   
-  <nav class="header-item nav-items-right" aria-label="Secondary navigation">
+  <nav class="header-item nav-items-right hide-on-mobile" aria-label="Secondary navigation">
     {
       rightItems.map((item) => (
         <a href={item.href} data-name={item.name}>
@@ -30,10 +30,21 @@ import ContactButton from './ContactButton.astro';
         </a>
       ))
     }
-    <ContactButton href="#contact-form">Contact us!</ContactButton>
+    <ContactButton href="#contact-form" class="hide-on-mobile">Contact us!</ContactButton>
+  </nav>
+
+  <nav class="nav-items show-on-mobile">
+    {
+      navItems.map((item) => (
+        <a href={item.href} data-name={item.name}>
+          {item.name}
+        </a>
+      ))
+    }
   </nav>
 
   <style>
+    
     .header {
       position: absolute;
       font-family: var(--comfortaa);
@@ -51,9 +62,16 @@ import ContactButton from './ContactButton.astro';
     }
 
     .nav-items-left,
-    .nav-items-right {
+    .nav-items-right
+     {
       flex: 1;
       display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .nav-items{
+      display: flex;
+      flex-direction: row;
       justify-content: center;
       align-items: center;
     }
@@ -110,6 +128,25 @@ import ContactButton from './ContactButton.astro';
     a:hover {
       transform: scale(1.05);
     }
+    .show-on-mobile {
+      display: none;
+    }
+    @media (max-width: 600px) {
+      .header {
+        padding-top: 1rem;
+        font-size: 3rem;
+      }
+      a {
+        margin: 0.5em;
+      }
+      .hide-on-mobile {
+        display: none;
+      }
+      .show-on-mobile {
+        display: flex;
+      }
+    }
+    
 
     @keyframes pulse {
       0%,

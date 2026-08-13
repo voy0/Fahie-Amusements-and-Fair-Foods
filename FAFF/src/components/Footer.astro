@@ -38,6 +38,10 @@
 
 <style>
   .footer-container {
+    margin-top: 20vh;
+    z-index: 100;
+    position: relative;
+    bottom: 0;
     background-color: var(--faff-darkblue, rgb(10, 10, 21));
     color: white;
     padding: 3rem 1rem 1rem 1rem;
@@ -46,6 +50,8 @@
   }
 
   .footer-content {
+    z-index: 100;
+
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -55,33 +61,44 @@
   }
 
   .footer-column {
+    z-index: 100;
+    
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    min-width: 200px;
   }
 
   .footer-column h3 {
+    z-index: 100;
+
     color: var(--faff-orange);
     margin-bottom: 1rem;
   }
 
   .footer-column a {
+    z-index: 100;
+
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   .footer-column a:hover {
+    z-index: 100;
+
     color: white;
     text-shadow: 0 0 5px var(--faff-orange);
   }
 
   .contact-link {
+    z-index: 100;
+
     font-weight: bold;
   }
 
   .footer-bottom {
+    z-index: 100;
+
     text-align: center;
     margin-top: 3rem;
     padding-top: 1rem;

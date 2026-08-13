@@ -5,12 +5,28 @@ import Content from '../components/Content.astro';
 import Footer from "../components/Footer.astro";
 import Layout from '../layouts/Layout.astro';
 import ContactForm from '../components/ContactForm.astro';
+import Banner from '../components/Banner.astro';
 ---
 
 <Layout>
+  <div class="site-wrapper"></div>
+  <Banner />
   <Header />
   <Hero />
-  <Content />
+  
+    <Content />
+  </div>
   <Footer />
 </Layout>
+
+<style>
+  .site-wrapper {
+    flex: 1 0 auto;
+    width: 100%;
+  }
+  @media (max-width: 600px) {
+    html{}
+  }
+  
+</style>
 

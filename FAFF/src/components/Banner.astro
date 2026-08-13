@@ -1,0 +1,90 @@
+---
+const items = ["Corporate Events",
+ "private parties",
+  "rentals",
+   "festivals",
+    "Company Picnics",
+  "Employee Appreciation Days",
+  "Brand Activations",
+  "Corporate Retreats",
+  "Client Appreciation Dinners",
+  "Weddings",
+  "Family Reunions",
+  "Graduation Parties",
+  "Birthday Bashes",
+  "Neighborhood Block Parties",
+  "County Fairs",
+  "Church Bazaars",
+  "School Fundraisers",
+  "Town Celebrations",
+  "Municipal Events",
+  "Trade Shows",
+  "Music Festivals",
+  "College Campus Events",
+  "Charity Galas",
+  "Holiday Markets"].map(item => item.toUpperCase());
+const marqueeItems = [...items, ...items];
+---
+
+<style>
+  .banner {
+    z-index: 100;
+    width: 100%;
+    height: var(--fs3);
+    overflow: hidden;
+    background: #d62828;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .banner-track {
+    display: flex;
+    width: max-content;
+    white-space: nowrap;
+    animation: marquee 60s linear infinite;
+    will-change: transform;
+  }
+
+  .banner-item {
+    padding: 0 2rem;
+    height: 100%;
+    font-size: var(--fs2);
+    font-weight: 600;
+    font-family: var(--comfortaa);
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    display: flex;
+    align-items: center;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (max-width: 600px) {
+    .banner {
+      height: 2.5rem;
+    }
+    .banner-item {
+      font-size: 2rem;
+      padding: 0 1rem;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="banner">
+    <div class="banner-track">
+      {marqueeItems.map((item) => <div class="banner-item">{item}</div>)}
+    </div>
+  </div>
+</div>
+
+
+
