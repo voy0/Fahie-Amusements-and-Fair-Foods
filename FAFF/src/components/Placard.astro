@@ -1,0 +1,37 @@
+---
+interface Props {
+  imageSrc: string;
+  imageAlt?: string;
+}
+
+const { imageSrc, imageAlt = '' } = Astro.props;
+---
+
+<div class="placard">
+  <img class="placard-image" src={imageSrc} alt={imageAlt} loading="lazy" />
+  <div class="tagline"></div>
+</div>
+
+<style>
+  .placard {
+    width: 40%;
+    height: 40%;
+    margin: 5% 0 0 5%;
+    background-color: #f0f0f0;
+    z-index: 10000;
+    display: inline-block;
+  }
+  .placard-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  @media (max-width: 600px) {
+    .placard {
+      width: 80%;
+      height: 40%;
+      margin: 10% 0 0 10%;
+    }
+  }
+</style>

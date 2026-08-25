@@ -1,0 +1,128 @@
+
+
+
+<div class="hero-wrapper">
+  <div class="logo">
+    <a href="/">
+      <img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
+    </a>
+  </div>
+  <div class="tagline-container">
+    <div class="tagline-wrapper">
+      <h1 class="tagline">Real Carnival Experience <br/>at Your Event</h1>
+      <h3 class="subtext">Family owned show. <br/> Just for <span>your</span> needs.</h3>
+    </div>
+  </div>
+</div>
+
+<style>
+
+    
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10vw;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  .logo a {
+    display: block;
+    transition: transform 0.2s ease;
+    transform-origin: center;
+  }
+
+  .logo a:hover {
+    transform: scale(1.05);
+  }
+
+  .logo img {
+    display: block;
+    height: 10vw;
+    width: auto;
+  }
+
+  .tagline-container {
+    position: inherit;
+    top: 0;
+    left: 0;
+    height: 60vw;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+  }
+
+  .tagline {
+    text-align: center;
+    line-height: 150%;
+    font-weight: lighter;
+    font-family: var(--coiny);
+    text-shadow: 0 0 5px var(--faff-orange),
+                 0 0 10px var(--faff-orange),
+                 0 0 15px var(--faff-orange);
+  }
+
+  .subtext {
+    margin-top: 5%;
+    font-weight: 100;
+    line-height: 150%;
+    font-size: 1em;
+    font-family: var(--comfortaa);
+    text-align: center;
+    text-shadow: 0 0 5px black,
+                 0 0 10px black,
+                 0 0 12px black,
+                 0 0 14px black,
+                 0 0 15px black;
+  }
+
+  .subtext span {
+    color: var(--faff-orange);
+  }
+
+  .hero-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow-x: hidden;
+  }
+
+  /* --- MOBILE STYLES AT THE BOTTOM --- */
+  @media (max-width: 600px) {
+    .hero-wrapper {
+      height: 100vh;
+      height: 100svh;
+      overflow: hidden;
+    }
+
+    
+
+    .logo {
+      top: 25vh; 
+    }
+
+    .logo img {
+      height: 25vw;
+      width: auto;
+    }   
+    .tagline-container {
+      position: absolute;
+      inset: 0;
+      top: auto;
+      left: auto;
+      height: 100%;
+      margin-top: 0;
+      font-size: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>

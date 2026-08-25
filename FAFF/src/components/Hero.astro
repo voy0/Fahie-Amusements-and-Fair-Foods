@@ -4,7 +4,8 @@ import { getImage } from 'astro:assets';
 
 import mobileBg from '../assets/hero-mobile.jpg';
 import desktopBg from '../assets/hero-desktop.jpg';
-import ContactForm from '../components/ContactForm.astro';
+import HeroBackground from './HeroBackground.astro';
+import HeroTagline from './HeroTagline.astro';
 
 const mobileImg = await getImage({ src: mobileBg, format: 'webp', width: 600 });
 const desktopImg = await getImage({
@@ -13,206 +14,15 @@ const desktopImg = await getImage({
   width: 1920,
 });
 ---
-<div class="hero-background">
-  <picture class="hero-image">
-    <source media="(max-width: 600px)" srcset={mobileImg.src} />
-    <img
-      src={desktopImg.src}
-      alt="Fahie Amusements and Fairfoods at night, with fireworks"
-      width={desktopImg.attributes.width}
-      height={desktopImg.attributes.height}
-      loading="lazy"
-      decoding="async"
-    />
-  </picture>
-  <div class="hero-gradient" id="hero-gradient1"></div>
-  <div class="hero-gradient" id="hero-gradient2"></div>
-</div>
-<div class="hero-wrapper">
-  <div class="logo">
-    <a href="/">
-      <img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
-    </a>
-  </div>
-  <div class="tagline-container">
-    <div class="tagline-wrapper">
-      <h1 class="tagline">Real Carnival Experience <br/>at Your Event</h1>
-      <h3 class="subtext">Family owned show. <br/> Just for <span>your</span> needs.</h3>
-    </div>
-  </div>
-</div>
+
+<HeroBackground/>
+<HeroTagline/>
 
 <style>  
   .hero-master {
 
   }
-  .hero-background {
-    position: absolute;
-    inset: 0;
-  }
-
-  .logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 10vw;
-    left: 50%;
-    z-index: 1;
-    transform: translate(-50%, -50%);
-  }
-
-  .logo a {
-    display: block;
-    transition: transform 0.2s ease;
-    transform-origin: center;
-  }
-
-  .logo a:hover {
-    transform: scale(1.05);
-  }
-
-  .logo img {
-    display: block;
-    height: 10vw;
-    width: auto;
-  }
-
-  .tagline-container {
-    position: inherit;
-    top: 0;
-    left: 0;
-    height: 60vw;
-    width: 100%;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-  }
-
-  .tagline {
-    text-align: center;
-    line-height: 150%;
-    font-weight: lighter;
-    font-family: var(--coiny);
-    text-shadow: 0 0 5px var(--faff-orange),
-                 0 0 10px var(--faff-orange),
-                 0 0 15px var(--faff-orange);
-  }
-
-  .subtext {
-    margin-top: 5%;
-    font-weight: 100;
-    line-height: 150%;
-    font-size: 1em;
-    font-family: var(--comfortaa);
-    text-align: center;
-    text-shadow: 0 0 5px black,
-                 0 0 10px black,
-                 0 0 12px black,
-                 0 0 14px black,
-                 0 0 15px black;
-  }
-
-  .subtext span {
-    color: var(--faff-orange);
-  }
-
-  .hero-wrapper {
-    position: relative;
-    width: 100%;
-    height: auto;
-    overflow-x: hidden;
-  }
-
-  .hero-image {
-    z-index: 0;
-    display: block;
-    width: 100%;
-    height: 100%; 
-  }
-
-  /* This applies to BOTH desktop and mobile by default */
-  .hero-image img {
-     z-index: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center; /* The Magic Fix */
-  }
-
-  .hero-gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  #hero-gradient1 {
-    background: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 60%) 1%,
-      rgba(0, 0, 0, 0) 35%,
-      rgba(0, 0, 0, 0) 50%,
-      rgba(0, 0, 0, 0) 65%,
-      rgba(0, 0, 0, 60%) 99%
-    );
-  }
-
-  #hero-gradient2 {
-    background: linear-gradient(
-      to top,
-      rgb(0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) 35%,
-      rgba(0, 0, 0, 0) 50%,
-      rgba(0, 0, 0, 0) 85%,
-      rgba(0, 0, 0) 100%
-    );
-  }
-  
-  /* --- MOBILE STYLES AT THE BOTTOM --- */
-  @media (max-width: 600px) {
-    .hero-wrapper {
-      height: 100vh;
-      height: 100svh;
-      overflow: hidden;
-    }
-
-    .hero-background {
-      inset: 0;
-    }
-
-    .hero-image {
-      position: absolute;
-      inset: 0;
-    }
-
-    .logo {
-      top: 25vh; 
-    }
-
-    .logo img {
-      height: 25vw;
-      width: auto;
-    }
-
-    .tagline-container {
-      position: absolute;
-      inset: 0;
-      top: auto;
-      left: auto;
-      height: 100%;
-      margin-top: 0;
-      font-size: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
+ 
   @media (max-width: 400px) {
     .logo{
       
