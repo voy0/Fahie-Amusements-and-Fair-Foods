@@ -21,7 +21,11 @@ import ContactButton from './ContactButton.astro';
     }
   </nav>
 
-  
+  <div class="logo">
+    <a href="/">
+      <img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
+    </a>
+  </div>
   <nav class="header-item nav-items-right hide-on-mobile" aria-label="Secondary navigation">
     {
       rightItems.map((item) => (
@@ -44,7 +48,13 @@ import ContactButton from './ContactButton.astro';
   </nav>
 
   <style>
-    
+    .logo{
+      
+    }
+    .logo img {
+      height: 8rem;
+      width: auto;
+    }
     .header {
       top: 0;
       position: absolute;

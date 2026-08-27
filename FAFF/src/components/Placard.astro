@@ -9,28 +9,58 @@ const { imageSrc, imageAlt = '' } = Astro.props;
 
 <div class="placard">
   <img class="placard-image" src={imageSrc} alt={imageAlt} loading="lazy" />
+  <!-- We use this overlay to hold the shadow -->
+  <div class="gradient-overlay"></div>
   <div class="tagline"></div>
 </div>
 
 <style>
   .placard {
-    width: 40%;
-    height: 40%;
-    margin: 5% 0 0 5%;
-    background-color: #f0f0f0;
-    z-index: 10000;
-    display: inline-block;
+    position: relative; /* CRITICAL: Traps the absolute overlay inside this card */
+    border-radius: 2vw;
+    border: 2px solid var(--faff-orange);
+    overflow: hidden;
+    width: 45%;
+    height: 50%;
+    margin: 3.3% 0 0 3.3%;
+    background-color: black;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
   }
+
+  .gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%; /* Matches the image height perfectly */
+    z-index: 5;
+    pointer-events: none; /* Allows users to still right-click or tap the image underneath */
+    
+    /* THE MAGIC FRAME: inset pushes the shadow inside. 
+       0 0 = centered, 60px = blur radius, 20px = spread radius */
+    box-shadow: inset 0 0 60px 20px rgba(0, 0, 0, 0.9); 
+  }
+
   .placard-image {
     width: 100%;
-    height: 100%;
+    height: 80%;
     object-fit: cover;
     display: block;
   }
+
+  .tagline {
+    height: 20%;
+    width: 100%;
+    background-color: var(--bg-blue);
+    z-index: 3;
+  }
+
   @media (max-width: 600px) {
     .placard {
       width: 80%;
-      height: 40%;
+      height: 30%;
       margin: 10% 0 0 10%;
     }
   }
