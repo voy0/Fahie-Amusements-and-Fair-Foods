@@ -12,7 +12,7 @@ import ContactForm from '../components/ContactForm.astro';
 <style>
     .container{
         position: relative;
-        top: -10%;
+        top: 0%;
         width: 100%;
         height: min-content;
         display: flex;
@@ -28,9 +28,9 @@ import ContactForm from '../components/ContactForm.astro';
         align-items: center;
         /* background-color: var(--bg-blue); */
     }
-    @media (max-width:1200px){
+    @media (min-width:1200px){
         .container{
-            top: 0;
+            top: -10vw;
             font-size: 1.6rem;
         }
     }
@@ -40,7 +40,12 @@ import ContactForm from '../components/ContactForm.astro';
         border-radius: 20px;
     }
     .container{
-        margin-top: -30%;
+        margin-top: -35%;
     }
+    }
+    @media (max-width:400px) {
+        .container{
+            margin-top: -60%;
+        }
     }
 </style>

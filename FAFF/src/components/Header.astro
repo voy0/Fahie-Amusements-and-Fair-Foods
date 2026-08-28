@@ -1,63 +1,99 @@
 ---
+interface Props {
+  showLogo?: boolean;
+  pageNumber?: number;
+}
+
+const { showLogo = true, pageNumber = -1 } = Astro.props;
+const contactHref = Astro.url.pathname === '/' ? '#contact-form' : '/#contact-form';
+const shouldAutoHide = Astro.url.pathname !== '/';
+
 const navItems = [
-  { name: 'Foods', href: 'equipment' },
-  { name: 'Amusements', href: '/amusements' },
-  { name: 'About Us', href: '/about' },
-  { name: 'Upcoming Events', href: '/upcoming' },
+  { name: 'Foods', href: '/foods', pageNumber: 1 },
+  { name: 'Amusements', href: '/amusements', pageNumber: 2 },
+  { name: 'About Us', href: '/about', pageNumber: 3 },
+  { name: 'Upcoming Events', href: '/upcoming', pageNumber: 4 },
 ];
 const leftItems = navItems.slice(0, 3);
 const rightItems = navItems.slice(3);
 import ContactButton from './ContactButton.astro';
 ---
 
-<div class="header">
+<div class="header" class:list={{ 'auto-hide-header': shouldAutoHide }}>
   <nav class="header-item nav-items-left hide-on-mobile" aria-label="Primary navigation">
     {
       leftItems.map((item) => (
-        <a href={item.href} data-name={item.name}>
+        <a href={item.href} data-name={item.name} class:list={{ active: pageNumber === item.pageNumber }}>
           {item.name}
         </a>
       ))
     }
   </nav>
 
-  <div class="logo">
-    <a href="/">
-      <img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
-    </a>
-  </div>
+  {showLogo && (
+    <div class="logo">
+      <a href="/">
+        <img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
+      </a>
+    </div>
+  )}
   <nav class="header-item nav-items-right hide-on-mobile" aria-label="Secondary navigation">
     {
       rightItems.map((item) => (
-        <a href={item.href} data-name={item.name}>
+        <a href={item.href} data-name={item.name} class:list={{ active: pageNumber === item.pageNumber }}>
           {item.name}
         </a>
       ))
     }
-    <ContactButton href="#contact-form" class="hide-on-mobile">Contact us!</ContactButton>
+    <ContactButton href={contactHref} class="hide-on-mobile">Contact us!</ContactButton>
   </nav>
 
   <nav class="nav-items show-on-mobile">
     {
       navItems.map((item) => (
-        <a href={item.href} data-name={item.name}>
+        <a href={item.href} data-name={item.name} class:list={{ active: pageNumber === item.pageNumber }}>
           {item.name}
         </a>
       ))
     }
   </nav>
+
+  <script>
+    const header = document.querySelector('.auto-hide-header');
+    let lastScrollY = window.scrollY;
+
+    if (header) {
+      header.classList.toggle('is-scrolling', lastScrollY > 0);
+
+      window.addEventListener(
+        'scroll',
+        () => {
+          const currentScrollY = window.scrollY;
+          header.classList.toggle('is-scrolling', currentScrollY > 0);
+
+          if (currentScrollY <= 0 || currentScrollY < lastScrollY) {
+            header.classList.remove('is-hidden');
+          } else if (currentScrollY > lastScrollY) {
+            header.classList.add('is-hidden');
+          }
+
+          lastScrollY = currentScrollY;
+        },
+        { passive: true }
+      );
+    }
+  </script>
 
   <style>
     .logo{
       
     }
     .logo img {
-      height: 8rem;
+      height: 7rem;
       width: auto;
     }
     .header {
-      top: 0;
-      position: absolute;
+      position: relative;
       font-family: var(--comfortaa);
       font-size: 1.5rem;
       display: flex;
@@ -65,6 +101,23 @@ import ContactButton from './ContactButton.astro';
       align-items: center;
       justify-content: center;
       z-index: 999;
+    }
+
+    .header.auto-hide-header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(18, 21, 43, var(--header-bg-opacity, 0));
+      transition: transform 0.25s ease;
+      transition-property: transform, background-color;
+    }
+
+    .header.auto-hide-header.is-scrolling {
+      --header-bg-opacity: 1;
+    }
+
+    .header.auto-hide-header.is-hidden {
+      --header-bg-opacity: 0;
+      transform: translateY(-100%);
     }
 
     .header-item {
@@ -136,16 +189,28 @@ import ContactButton from './ContactButton.astro';
       opacity: 1;
     }
 
+    a.active::after {
+      opacity: 1;
+    }
+
     a:hover {
       transform: scale(1.05);
     }
     .show-on-mobile {
       display: none;
     }
+    @media(min-width: 1200px){
+      .header{
+        font-size: 1.1rem;
+      }
+      .logo img{
+        height: 4rem;
+      }
+    }
     @media (max-width: 600px) {
       .header {
         padding-top: 1rem;
-        font-size: 3rem;
+        font-size: 2.3rem;
       }
       a {
         margin: 0.5em;

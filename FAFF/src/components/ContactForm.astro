@@ -34,7 +34,7 @@ import ContactButton from './ContactButton.astro'
             <label class="label" for="phone-tf">Phone</label>
             <div class="separator" aria-hidden="true"></div>
             <div class="textfield">
-              <input type="tel" name="phone" id="phone-tf" placeholder="(555) 555-5555" pattern="[0-9()+\s-]*" />
+              <input type="tel" name="phone" id="phone-tf" placeholder="(555) 555-5555" required />
             </div>
           </div>
 
@@ -42,7 +42,7 @@ import ContactButton from './ContactButton.astro'
             <label class="label" for="message-tf">What's it about</label>
             <div class="separator" aria-hidden="true"></div>
             <div class="textfield">
-              <textarea name="message" id="message-tf" rows="5" placeholder="Tell us a little about your inquiry" required></textarea>
+              <textarea name="message" id="message-tf" rows="5" placeholder="Tell us a little about your inquiry"></textarea>
             </div>
           </div>
 
@@ -66,6 +66,72 @@ import ContactButton from './ContactButton.astro'
   </div>
 </div>
 
+<script>
+  const form = document.querySelector('#contact-form-id');
+  const formWrapper = document.querySelector('#contact-form');
+  const fields = [
+    document.querySelector('#name-tf'),
+    document.querySelector('#email-tf'),
+    document.querySelector('#phone-tf'),
+  ].filter((field): field is HTMLInputElement => field instanceof HTMLInputElement);
+  const isValidField = (field: HTMLInputElement) => {
+    const value = field.value.trim();
+
+    if (field.id === 'name-tf') {
+      return value.length > 0;
+    }
+
+    if (field.id === 'email-tf') {
+      return field.validity.valid && value.length > 0;
+    }
+
+    if (field.id === 'phone-tf') {
+      return /^(?:\+?1[\s.-]?)?(?:\([2-9]\d{2}\)|[2-9]\d{2})[\s.-]?[2-9]\d{2}[\s.-]?\d{4}$/.test(value);
+    }
+
+    return true;
+  };
+
+  const setFieldValidity = (field: HTMLInputElement, isValid: boolean) => {
+    field.classList.toggle('field-invalid', !isValid);
+    field.setAttribute('aria-invalid', String(!isValid));
+  };
+
+  if (form && formWrapper) {
+    form.addEventListener('submit', (event) => {
+      let hasErrors = false;
+      let firstInvalidField: HTMLInputElement | undefined;
+
+      fields.forEach((field) => {
+        const isValid = isValidField(field);
+        setFieldValidity(field, isValid);
+
+        if (!isValid) {
+          hasErrors = true;
+          firstInvalidField ??= field;
+        }
+      });
+
+      formWrapper.classList.toggle('has-errors', hasErrors);
+
+      if (hasErrors) {
+        event.preventDefault();
+        firstInvalidField?.focus();
+      }
+    });
+
+    fields.forEach((field) => {
+      field.addEventListener('input', () => {
+        const isValid = isValidField(field);
+        setFieldValidity(field, isValid);
+
+        const hasErrors = fields.some((currentField) => !isValidField(currentField));
+        formWrapper.classList.toggle('has-errors', hasErrors);
+      });
+    });
+  }
+</script>
+
 <style>
   :root{
     --accent1: rgba(40, 49, 171, 0.485);
@@ -80,26 +146,38 @@ import ContactButton from './ContactButton.astro'
     max-width: calc(70% * var(--form-scale));
     height: calc(40% * var(--form-scale));
     border-radius: 1.25rem;
+    border: 2px solid var(--faff-orange);
     background-color: var(--faff-darkblue);
     /* background: linear-gradient(180deg, var(--accent1), var(--accent2)); */
     padding: 2rem;
     font-size: var(--fs2);
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+  }
+
+  .wrapper.has-errors {
+    border-color: #ff1a1a;
+    box-shadow:
+      0 0 0.5rem #ff1a1a,
+      0 0 1.5rem rgba(255, 0, 0, 0.9),
+      0 6px 18px rgba(0, 0, 0, 0.08);
   }
 
   .contact-container{
     display: flex;
     gap: 1.25rem;
     align-items: stretch;
+    min-width: 0;
   }
 
   .form-column{ 
-    flex: 0 0 60%; 
+    flex: 1 1 60%;
+    min-width: 0;
+    box-sizing: border-box;
     background: linear-gradient(180deg, var(--accent1), var(--accent2));
     border-radius: 0.75rem;
     padding: 1.5rem;  
   }
-  .info-column{ flex: 0 0 35%; }
 
   .headline{
     margin-bottom: 3.5rem;
@@ -184,16 +262,27 @@ import ContactButton from './ContactButton.astro'
     /* box-shadow: 0 0 0 4px rgba(255,165,0,0.06); */
   }
 
-  .actions{ display:flex; justify-content:flex-end;
+  .textfield input.field-invalid {
+    border-color: #ff1a1a;
+    box-shadow:
+      0 0 0.4rem #ff1a1a,
+      0 0 1rem rgba(255, 0, 0, 0.9);
+  }
+
+  .actions{ display:flex; justify-content: center; 
    }
   /* adjust ContactButton spacing inside actions */
   .actions :is(button, .button, a){
     margin: 0;
-    font-size: var(--fs4);
+    font-size: var(--fs3);
     width: max-content;
   }
 
   .info-column{
+    flex: 1 1 35%;
+    width: auto;
+    min-width: 0;
+    box-sizing: border-box;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -205,7 +294,19 @@ import ContactButton from './ContactButton.astro'
     border-radius: 0.75rem;
     padding: 1rem;
     width: 100%;
+    max-width: 100%;
     color: #fff;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+  }
+
+  .actions {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .actions :is(button, .button, a) {
+    max-width: 100%;
     box-sizing: border-box;
   }
 
@@ -216,7 +317,9 @@ import ContactButton from './ContactButton.astro'
   label {font-size: var(--fs1);}
 
   @media (max-width: 600px){
-    
+    .actions :is(button, .button, a) {
+      font-size: var(--fs4);
+    }
     .wrapper{ width: 100%;
     font-size: var(--fs5);
   padding: 2rem;}
@@ -227,7 +330,11 @@ import ContactButton from './ContactButton.astro'
       font-size: var(--fs4);
     }
     .contact-container{ flex-direction:column; }
-    .form-column, .info-column{ flex: 0 1 100%; }
+    .form-column, .info-column{
+      flex: 0 1 100%;
+      width: 100%;
+      max-width: 100%;
+    }
     .form-column{
       font-size: var(--fs5);
     }
@@ -236,6 +343,10 @@ import ContactButton from './ContactButton.astro'
     .separator{ display:none; }
     .label{ margin-bottom:0.25rem; justify-self:start; }
     .info-column{flex-wrap:nowrap;}
-    .actions{flex: 1 1 100%; justify-content:center;}
+    .actions{flex: 1 1 100%; justify-content:center; }
+    .textfield input,
+  .textfield textarea{
+    font-size: var(--fs5);
+  }
   }
 </style>
