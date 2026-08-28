@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import Layout from '../layouts/Layout.astro';
 import HeroBackground from '../components/HeroBackgroundFixed.astro';
 import Placards from '../components/Placards.astro';
+import Events from '../components/Events.astro';
 //import { getEquipment } from '../utils/equipment.js';
 
 //const equipment = getEquipment();
@@ -13,6 +14,7 @@ import Placards from '../components/Placards.astro';
 ---
 
 <Layout>
-<Header pageNumber={4}/>
+    <Header pageNumber={4}/>
+    <Events/>
 <HeroBackground/>
 </Layout>
