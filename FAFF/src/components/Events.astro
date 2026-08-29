@@ -1,28 +1,66 @@
 ---
 import Event from '../components/Event.astro';
+import { getCollection } from 'astro:content';
+
+// 1. Fetch the data using Astro's native content collections
+const allEvents = await getCollection('events');
+
+// 2. Sort them chronologically
+const events = allEvents.sort((a: any, b: any) => 
+    new Date(a.data.date).valueOf() - new Date(b.data.date).valueOf()
+);
+
+// 3. Helper function to get month and day
+const getDateParts = (dateInput: Date | string) => {
+    // Astro automatically converts dates, but this handles strings just in case
+    const dateObj = new Date(dateInput);
+    return {
+        month: dateObj.toLocaleDateString('en-US', { month: 'short' }).toUpperCase(),
+        day: dateObj.getDate(),
+    };
+};
 ---
 
 <div class="container">
-    
-<div class="wrapper">
-    <Event/>
-</div>
+    <div class="wrapper">
+        {
+            events.map((event: any) => {
+                const { month, day } = getDateParts(event.data.date);
+
+                return (
+                    <Event
+                        title={event.data.title}
+                        month={month}
+                        day={day}
+                        hoursFrom={event.data.hoursFrom} 
+                        hoursTo={event.data.hoursTo}
+                        locationName={event.data.locationName}
+                        mapUrl={event.data.mapUrl}
+                        description={event.data.description}
+                        
+                    />
+                );
+            })
+        }
+    </div>
 </div>
 
 <style>
-    .wrapper{
+    .wrapper {
         position: relative;
         display: flex;
+        flex-direction: column; /* Changed to column so cards stack vertically */
+        gap: 1.5rem; /* Adds space between your stacked cards */
         justify-content: center;
         align-items: center;
-        width: 30%;
+        width: 30%; /* You may want to increase this for mobile! */
         background-color: var(--bg-blue);
         height: auto;
     }
-    .container{
+    .container {
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 3rem 0; /* Added padding so cards don't touch the edges */
     }
-    </style>
-
+</style>

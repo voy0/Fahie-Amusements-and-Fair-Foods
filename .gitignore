@@ -1,1 +1,21 @@
 /pictures
+
+# Dependencies
+node_modules/
+FAFF/node_modules/
+
+# Build output
+dist/
+FAFF/dist/
+
+# Astro Cache
+.astro/
+FAFF/.astro/
+
+# Environment Variables
+.env
+.env.*
+
+# OS Files
+.DS_Store
+Thumbs.db

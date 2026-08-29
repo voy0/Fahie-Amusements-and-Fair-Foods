@@ -1,28 +1,49 @@
 ---
+interface Props {
+  title: string;
+  month: string;
+  day: string | number;
+  hoursFrom?: string;  /* The ? means "optional" */
+  hoursTo?: string;
+  locationName?: string;
+  mapUrl?: string;
+  description?: string;
+}
+
+const { 
+  title, 
+  month, 
+  day, 
+  hoursFrom,
+  hoursTo,
+  locationName, 
+  mapUrl, 
+  description 
+} = Astro.props;
 
 ---
 
 <div class="event">
     <div class="date">
-        <div class="month">AUG</div>
-        <div class="day"><div class="day-wrapper">15</div></div>
-        <div class="hours">9:00AM - 9:00PM</div>
+        <div class="month">{month}</div>
+        <div class="day"><div class="day-wrapper">{day}</div></div>
+        <div class="hours">{hoursFrom} - {hoursTo}</div>
     </div>
 
     <div class="w1">
-        <div class="title"> Waterboro Old Home Days</div>
+        <div class="title">{title}</div>
         <a
             class="location"
-            href="https://www.google.com/maps/search/?api=1&query=Waterboro%2C%20ME"
-            aria-label="Open Waterboro, ME in maps"
+            href={mapUrl}
+            aria-label={`Open ${locationName} in maps`}
         >
             <svg class="location-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z" />
                 <circle cx="12" cy="9" r="2.25" />
             </svg>
-            <span>Waterboro, ME</span>
+            <span>{locationName}</span>
         </a>
-        <div class="description">Lemonade, Fried Dough, Kiddy Striker, and more!</div>
+        <div class="description">{description}</div>
     </div>
    
 </div>

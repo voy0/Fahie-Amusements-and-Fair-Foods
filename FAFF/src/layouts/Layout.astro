@@ -1,5 +1,5 @@
 ---
-import { Font } from 'astro:assets';
+// Removed the broken { Font } import
 ---
 
 <!doctype html>
@@ -8,12 +8,13 @@ import { Font } from 'astro:assets';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="fafficon.svg" />
-    <!-- <link rel="icon" href="/fafficon.ico" /> -->
     <meta name="generator" content={Astro.generator} />
-    <Font cssVariable="--comfortaa" preload />
-    <Font cssVariable="--coiny" preload />
     
-
+    <!-- ADDED: Standard Google Fonts connection -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    
     <title>Fahie Amusements & Fair Foods</title>
   </head>
   <body>
@@ -22,7 +23,12 @@ import { Font } from 'astro:assets';
 </html>
 
 <style is:global>
-  :root{
+  :root {
+    /* ADDED: Recreating your CSS font variables manually */
+    --comfortaa: 'Comfortaa', sans-serif;
+    --coiny: 'Coiny', system-ui;
+
+    /* Your existing variables */
     --faff-orange: rgb(236, 94, 26);
     --faff-blue: rgb(37, 56, 112);
     --faff-darkblue: rgb(20, 20, 40);
@@ -33,6 +39,7 @@ import { Font } from 'astro:assets';
     --fs4: 2.5rem;
     --fs5: 2.8rem;
   }
+  
   html,
   body {
     background-color: black;
@@ -43,18 +50,18 @@ import { Font } from 'astro:assets';
     height: 100%;
     font-size: 1vw;
   }
-  
 
   html {
     scroll-behavior: smooth;
   }
 
-  div{
-    font-family: var(--comfortaa)
+  div {
+    font-family: var(--comfortaa);
   }
+  
   @media (min-width: 1200px){
-      html{
-        font-size:clamp(8px, 0.9em,16px);
+      html {
+        font-size: clamp(8px, 0.9em, 16px);
       }
-    }
+  }
 </style>
