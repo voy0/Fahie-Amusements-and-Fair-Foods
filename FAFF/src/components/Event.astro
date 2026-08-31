@@ -3,27 +3,28 @@ interface Props {
   title: string;
   month: string;
   day: string | number;
-  hoursFrom?: string;  /* The ? means "optional" */
+  hoursFrom?: string;
   hoursTo?: string;
   locationName?: string;
   mapUrl?: string;
   description?: string;
+  variant?: 'upcoming' | 'upcoming-next' | 'past';
 }
 
-const { 
-  title, 
-  month, 
-  day, 
+const {
+  title,
+  month,
+  day,
   hoursFrom,
   hoursTo,
-  locationName, 
-  mapUrl, 
-  description 
+  locationName,
+  mapUrl,
+  description,
+  variant = 'upcoming',
 } = Astro.props;
-
 ---
 
-<div class="event">
+<div class:list={['event', variant]}>
     <div class="date">
         <div class="month">{month}</div>
         <div class="day"><div class="day-wrapper">{day}</div></div>
@@ -45,7 +46,6 @@ const {
         </a>
         <div class="description">{description}</div>
     </div>
-   
 </div>
 
 <style>
@@ -64,7 +64,30 @@ const {
         border-radius: 1.25rem;
         overflow: hidden;
         display: flex;
+        transition: filter 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
     }
+
+    .event.upcoming {
+        border-color: var(--faff-orange);
+        box-shadow: none;
+    }
+
+    .event.upcoming-next {
+        border-color: var(--faff-orange);
+        box-shadow: 0 0 5px var(--faff-orange),
+                 0 0 10px var(--faff-orange),
+                 0 0 15px var(--faff-orange);
+    }
+
+    .event.past {
+        background: #000;
+        border-color: #fff;
+        color: #fff;
+        filter: grayscale(1) brightness(0.9);
+        opacity: 0.8;
+        box-shadow: none;
+    }
+
     .date{
         background-color: rgb(56, 40, 25);
         height: 100%;
@@ -73,6 +96,9 @@ const {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+    .event.past .date {
+        background-color: #111;
     }
     .date div{
         text-align: center;
@@ -133,4 +159,4 @@ const {
         height: 100%;
         flex: 2;
     }
-    </style>
+</style>
