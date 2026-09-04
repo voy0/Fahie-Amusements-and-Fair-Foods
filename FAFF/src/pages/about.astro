@@ -6,13 +6,189 @@ import Footer from "../components/Footer.astro";
 import Layout from '../layouts/Layout.astro';
 import HeroBackground from '../components/HeroBackgroundFixed.astro';
 import Placards from '../components/Placards.astro';
-//import { getEquipment } from '../utils/equipment.js';
+import TitleComponent from '../components/TitleComponent.astro';
+import picFamily from '../assets/about/family.jpg';
+import picDad from '../assets/about/daddysboy.jpg';
+import picLittle from '../assets/about/littlelemonade.jpg';
+import picKids from '../assets/about/kids.jpg';
+import { getImage } from 'astro:assets';
 
-//const equipment = getEquipment();
+const pictureFamily = await getImage({
+  src: picFamily,
+  format: 'webp',
+  width: 1920,
+});
+const pictureDad = await getImage({
+  src: picDad,
+  format: 'webp',
+  width: 1920,
+});
+const pictureLittle = await getImage({
+  src: picLittle,
+  format: 'webp',
+  width: 1920,
+});
+const pictureKids = await getImage({
+  src: picKids,
+  format: 'webp',
+  width: 1920,
+});
 
+const contentParagraphs = [
+  "For more than 40 years, our family has proudly been part of the carnival industry, traveling the East Coast and creating lasting memories for generations of families. What began decades ago has become a lifelong passion built on hard work, family values, and a commitment to making every event a special experience.",
+  "Through the years, we've had the privilege of visiting hundreds of communities, meeting amazing people, and watching children who once visited our midway return years later with children of their own. As a family-owned and operated business, we take pride in providing a welcoming atmosphere, family-friendly rides, and classic carnival favorites while treating every event as if it were our own.",
+  "We're honored to continue the tradition that has been passed down through our family for over four decades, and we look forward to sharing the fun with many more generations to come."
+];
 ---
 
 <Layout>
 <Header pageNumber={3}/>
 <HeroBackground/>
+    <div class="container"><div class="wrapper">
+        
+        <div class="paragraphWrapper">
+        <TitleComponent title="How the Magic Began" separate={true}/>
+
+            <div class="content">
+                <img src={pictureDad.src} alt="Father and son" />
+            
+<p>For more than 40 years, our family has proudly been part of the carnival industry. What began decades ago wasn't just a business venture; it was born from a lifelong passion for the sights, sounds, and undeniable magic of the midway. </p>
+<p>Our founders realized early on that a carnival is more than just flashing lights and cotton candy—it is a traveling community hub. We were inspired by the simple, powerful idea of bringing joy directly to people's hometowns. That initial spark of inspiration became a lifelong commitment to hard work, family values, and making every single event a special experience for the communities we visit.</p>
+</div>
+        
+        </div>
+        <div class="paragraphWrapper">
+
+        <TitleComponent title="The Family Behind the Fun" separate={true}/>
+            <div class="content">
+
+            <img src={pictureFamily.src} alt="The Dad" />
+<p>Unlike massive corporate amusement parks, Fahie Amusements and Fair Foods is entirely family-owned and operated. We are the people setting up the rides, pouring the fresh lemonade, and greeting you at the ticket booth. Because we are a family, we know exactly what families are looking for when they step onto our midway.</p>
+
+<p>The carnival life is in our blood. It is a tradition that has been passed down through our family for over four decades. We treat every event as if it were our own backyard gathering, taking immense pride in providing a welcoming atmosphere, pristine family-friendly rides, and the classic carnival hospitality that keeps our guests smiling.</p>
+
+ </div>
+    </div>
+        <div class="paragraphWrapper">
+
+    <TitleComponent title="Growing With Our Communities" separate={true}/>
+            <div class="content">
+
+            <img src={pictureLittle.src} alt="The Little Lemonade" />
+            
+<p>Through the years, we've had the privilege of traveling up and down the East Coast, visiting hundreds of communities and meeting amazing people. Our evolution has always been driven by our guests. We started small, but as the crowds grew, so did our offerings. We continuously expanded our midway to include modern, safe rides while preserving the nostalgic, vintage charm of classic carnival games.</p>
+
+<p>We also perfected our menus along the way. Today, our food stands—serving up everything from hot, powdered fried dough to fresh gyros and hand-cut french fries—are a staple of the fairgrounds. The most rewarding part of our journey is the generations of loyalty we've built. We are now watching children who once visited our midway return years later, their faces lighting up as they share the exact same rides and treats with children of their own.</p>
+
+ </div>
+    </div>
+        <div class="paragraphWrapper">
+
+    <TitleComponent title="Our Mission & Vision for the Future" separate={true}/>
+            <div class="content">
+
+            <img src={pictureKids.src} alt="The Kids" />
+            
+
+                
+                <p>As we look toward the future, our vision is to keep the timeless tradition of the traveling carnival alive in an increasingly digital world. We are constantly upgrading our equipment to exceed modern safety standards, expanding our route to bring the fun to new towns, and refining our classic food recipes.</p>
+                <p><span class="quote">~ Our mission is to deliver safe, clean, and unforgettable family entertainment while treating every community we visit with the care and respect of a local neighbor.</span></p>
+
+                <p>We are honored to carry the torch of this 40-year family tradition, and we look forward to sharing the fun, the thrills, and the fried dough with many more generations to come.</p>
+            </div>
+                
+ </div>
+    </div>
+</div>
+<Footer/>
 </Layout>
+
+     
+<style>
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .wrapper{
+        width: 55%;
+        position: relative;
+    }
+    .paragraphWrapper{
+        background-color: rgba(11, 13, 31, 0.7);
+        border: solid var(--faff-orange) 1px;
+        display: block;
+        padding: 0rem 6rem 3rem 6rem;
+        margin: 8rem 0;
+        border-radius: 2rem;
+        overflow: hidden;
+    }
+    .paragraphWrapper img{
+        display: block;
+        float: left;
+        width: 45%;
+        height: auto; /* preserve aspect ratio */
+        margin: 0.5rem 2rem;
+        border-radius: 1rem;
+        box-shadow: 5px 5px var(--faff-orange),
+        -5px -5px var(--faff-blue);
+    }
+    .paragraphWrapper:nth-of-type(2n) img{
+        float: right;
+    }
+    .content{
+        font-size: 1.1rem;
+        font-weight: 400;
+        text-align: justify;
+        line-height: 2rem;
+        text-shadow: 1px 1px 2px var(--faff-orange);
+    }
+    
+    .quote{
+        font-size: 0.85rem;
+        font-weight: 200;
+        color: rgba(255, 255, 255, 0.926);
+        font-style: italic;
+        
+    }
+    @media(max-width: 1200px){
+        .wrapper{
+            width: 75%;
+        }
+        .content{
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+        }
+        .paragraphWrapper img{
+            width: 60%;
+        }
+        .quote{
+            font-size: 1em;
+        }
+    }
+    @media (max-width: 600px){
+        .wrapper{
+            width: 80%;
+        }
+        .paragraphWrapper{
+            float: none;
+            padding: 4rem;
+            
+        }
+        .paragraphWrapper .content img{
+            float: none;
+            width: 100%;
+            margin: 4rem 0;
+            height: auto; /* keep original ratio on small screens */
+            max-width: 100%;
+        }
+        .content{
+            font-size: 2.2rem;
+            line-height: 3.5rem;
+            font-weight: 100;
+        }
+        .quote{
+            font-size: 1em;
+        }
+    }
+</style>

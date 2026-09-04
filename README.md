@@ -19,9 +19,14 @@ about us
 upcoming events
 - cms
 - date with descrition, map link
+TO ACCOMODATE TO CLIENT
+- ADD CLICKABLE JOINTS IN EVENT TO ADD
+- ADD TIME SELECTION, SO TIME DOESNT, GET MESSED UP 
+- ADD MULTIPLE DAY EVENTS
 
 contact us 
 - sending would send
+
 
 
 <picture>

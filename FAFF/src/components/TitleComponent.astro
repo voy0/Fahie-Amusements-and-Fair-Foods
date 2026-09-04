@@ -14,6 +14,7 @@ const { title, separate = false } = Astro.props;
 </div>
 
 <style>
+  
   .container {
     z-index: 1;
     display: flex;
@@ -23,13 +24,23 @@ const { title, separate = false } = Astro.props;
     color: rgb(240, 233, 233);
     text-shadow: 0 0 5px var(--faff-orange),
                  0 0 10px var(--faff-orange),
-                 0 0 15px var(--faff-orange);
+                 0 0 15px var(--faff-orange),
+                 0 0 5px rgb(0, 0, 0),
+                 0 0 10px rgb(0, 0, 0),
+                 0 0 15px rgb(0, 0, 0),
+                 0 0 20px rgb(0, 0, 0),
+                 -1px -1px 1px rgb(255, 0, 0),        /* Deep black cutout on top-left */
+              -1px 1px 1px rgb(255, 0, 0), 
+              1px -1px 1px rgb(255, 0, 0), 
+              1px 1px 1px rgb(255, 0, 0);
   }
+
   .wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: left;
+    align-items: flex-start;
+    margin-top: 3rem;
     gap: 0.5rem;
     width: 100%;
   }
@@ -40,12 +51,18 @@ const { title, separate = false } = Astro.props;
     text-transform: uppercase;
   }
   .separator {
+    z-index: 100;
     width: 100%;
-    height: 1px;
-    border-radius: 1px;
-    background-color: rgb(252, 141, 100);
+    height: 0;
+    border-bottom: 1px solid var(--faff-orange);
     box-shadow: 0 0 5px var(--faff-orange),
-                 0 0 10px var(--faff-orange),
-                 0 0 15px var(--faff-orange);
+                0 0 10px var(--faff-orange),
+                0 0 15px var(--faff-orange);
+  }
+
+  @media (max-width: 600px) {
+    .title {
+      font-size: 4em;
+    }
   }
   </style>
