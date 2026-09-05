@@ -3,22 +3,22 @@
 #4EED7E
 #FF89E4
 #35E1FF
-
+<!-- 
 add banner with information on front page
 - corporate events
 - rentals
 - festivals
 - fairs
-- events
+- events -->
 
 foods and amusements with all of the joints and pictures and description in form of placards
-
+<!-- 
 about us
-- history, picutres, in form of a blog post
-
+- history, picutres, in form of a blog post -->
+<!-- 
 upcoming events
 - cms
-- date with descrition, map link
+- date with descrition, map link -->
 TO ACCOMODATE TO CLIENT
 - ADD CLICKABLE JOINTS IN EVENT TO ADD
 - ADD TIME SELECTION, SO TIME DOESNT, GET MESSED UP 
@@ -27,6 +27,7 @@ TO ACCOMODATE TO CLIENT
 contact us 
 - sending would send
 
+refurbish footer
 
 
 <picture>
