@@ -32,7 +32,7 @@ import ContactButton from './ContactButton.astro';
 
   {showLogo && (
     <div class="logo">
-      <a href="/">
+      <a href={import.meta.env.BASE_URL}>
         <img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
       </a>
     </div>

@@ -8,7 +8,7 @@
     <!-- Column 1: Brand & Contact -->
      <div class="footer-column">
       <div class="logo">
-      <a href="/">
+      <a href={import.meta.env.BASE_URL}>
         <img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
       </a>
     </div>
@@ -23,10 +23,10 @@
     <!-- Column 2: Quick Links -->
     <div class="footer-column">
       <h3>Explore</h3>
-      <a href="/foods">Fair Foods</a>
-      <a href="/amusements">Amusements</a>
-      <a href="/upcoming">Upcoming Events</a>
-      <a href="/about">About Us</a>
+      <a href={`${import.meta.env.BASE_URL}foods`}>Fair Foods</a>
+      <a href={`${import.meta.env.BASE_URL}amusements`}>Amusements</a>
+      <a href={`${import.meta.env.BASE_URL}upcoming`}>Upcoming Events</a>
+      <a href={`${import.meta.env.BASE_URL}about`}>About Us</a>
     </div>
 
     <!-- Column 3: Socials -->
