@@ -1,4 +1,11 @@
 {
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
   "dependencies": {
     "@astrojs/react": "^6.0.4",
     "@fontsource/comfortaa": "^5.2.8",
