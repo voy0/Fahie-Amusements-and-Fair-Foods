@@ -9,7 +9,7 @@ const contactHref = Astro.url.pathname === '/' ? '#contact-form' : '/#contact-fo
 const shouldAutoHide = Astro.url.pathname !== '/';
 
 const navItems = [
-  { name: 'Foods', href: '../foods', pageNumber: 1 },
+  { name: 'Foods', href: '/foods', pageNumber: 1 },
   { name: 'Amusements', href: '/amusements', pageNumber: 2 },
   { name: 'About Us', href: '/about', pageNumber: 3 },
   { name: 'Upcoming Events', href: '/upcoming', pageNumber: 4 },
@@ -32,8 +32,8 @@ import ContactButton from './ContactButton.astro';
 
   {showLogo && (
     <div class="logo">
-      <a href={import.meta.env.BASE_URL}>
-        <img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
+      <a href="/">
+        <img src="/fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
       </a>
     </div>
   )}
