@@ -10,7 +10,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 export default defineConfig({
   site: 'https://voy0.github.io',
-  base: '/Fahie-Amusements-and-Fair-Foods',
   output: 'static',
   
   env: {
