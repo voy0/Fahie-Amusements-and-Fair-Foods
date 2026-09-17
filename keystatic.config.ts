@@ -1,7 +1,14 @@
 import { config, fields, collection } from '@keystatic/core';
+const isLocal = process.env.NODE_ENV === 'development';
 
 export default config({
-  storage: { kind: 'local' }, 
+  // Dynamically switch storage based on the environment
+  storage: isLocal 
+    ? { kind: 'local' } 
+    : { 
+        kind: 'github', 
+        repo: 'voy0/Fahie-Amusements-and-Fair-Foods' 
+      }, 
   collections: {
     events: collection({
       label: 'Upcoming Events',

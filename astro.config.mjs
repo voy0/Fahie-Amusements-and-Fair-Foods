@@ -1,29 +1,27 @@
 import { defineConfig } from "astro/config";
 import react from '@astrojs/react';
-
-const integrations = [react()];
-
-if (process.env.NODE_ENV !== 'production') {
-  const { default: keystatic } = await import('@keystatic/astro');
-  integrations.push(keystatic());
-}
+import keystatic from '@keystatic/astro';
 
 export default defineConfig({
-  site: 'https://voy0.github.io',
+  site: 'https://fahieamusements.com', // Updated to your new custom domain!
   output: 'static',
   
   env: {
     schema: {},
   },
 
-  integrations,
+  // Include Keystatic unconditionally so it deploys to production
+  integrations: [react(), keystatic()],
 
   vite: {
-    // REMOVED the ssr: external block so Astro can do its job!
     server: {
       fs: {
         allow: ['..']
       }
+    },
+    // Fixes the blank white screen / lodash hydration error
+    optimizeDeps: {
+      include: ['lodash/debounce']
     }
   }
 });
