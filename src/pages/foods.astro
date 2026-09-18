@@ -1,15 +1,55 @@
 --- 
 import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import Content from '../components/Content.astro';
-import Footer from "../components/Footer.astro";
 import Layout from '../layouts/Layout.astro';
 import HeroBackground from '../components/HeroBackgroundFixed.astro';
-import Placards from '../components/Placards.astro';
 import ShowcaseWrapper from '../components/ShowcaseWrapper.astro';
-//import { getEquipment } from '../utils/equipment.js';
 
-//const equipment = getEquipment();
+import friedDough from '../assets/placards/fried_dough.jpg';
+import friedDough1 from '../assets/placards/fried_dough1.jpg';
+import friedDough2 from '../assets/placards/fried_dough2.jpg';
+import friedDough3 from '../assets/placards/fried_dough3.jpg';
+import friedDough4 from '../assets/placards/fried_dough4.jpg';
+import friedDough5 from '../assets/placards/fried_dough5.jpg';
+import friedDough6 from '../assets/placards/fried_dough6.jpg';
+import churro1 from '../assets/placards/churro1.jpg';
+import bloomingOnion1 from '../assets/placards/blooming_onion1.jpg';
+import bloomingOnion2 from '../assets/placards/blooming_onion2.jpg';
+import bloomingOnion3 from '../assets/placards/blooming_onion3.jpg';
+import smokinFizz1 from '../assets/placards/smokin_fizz1.jpg';
+
+const img_fried_dough = [
+    { src: friedDough.src, alt: 'Fried dough' },
+    { src: friedDough1.src, alt: 'Fried dough variation' },
+    { src: friedDough2.src, alt: 'Fried dough close-up' },
+    { src: friedDough3.src, alt: 'Fried dough serving' },
+    { src: friedDough5.src, alt: 'Fresh fried dough' },
+];
+const img_churro = [{ src: churro1.src, alt: 'Churro' }];
+const img_blooming_onion = [
+    { src: bloomingOnion1.src, alt: 'Blooming onion' },
+    { src: bloomingOnion2.src, alt: 'Blooming onion variation' },
+    { src: bloomingOnion3.src, alt: 'Blooming onion close-up' },
+];
+const img_smokin_fizz = [{ src: smokinFizz1.src, alt: 'Smokin Fizz' }];
+import sunshGirls1 from '../assets/placards/sunsh_girls1.jpg';
+import sunshGirls2 from '../assets/placards/sunsh_girls2.jpg';
+import sunshGirls3 from '../assets/placards/sunsh_girls3.jpg';
+import sunshGirld4 from '../assets/placards/sunsh_girld4.jpg';
+
+const img_sunsh_girls = [
+    { src: sunshGirls1.src, alt: 'Sunsh girls' },
+    { src: sunshGirls2.src, alt: 'Sunsh girls variation' },
+    { src: sunshGirls3.src, alt: 'Sunsh girls close-up' },
+    { src: sunshGirld4.src, alt: 'Sunsh girls at the fair' },
+];
+
+const food_showcases = [
+    { title: 'Fried Dough', images: img_fried_dough },
+    { title: 'Churro', images: img_churro },
+    { title: 'Blooming Onion', images: img_blooming_onion },
+    { title: 'Smokin Sips', images: img_smokin_fizz },
+    { title: 'Sunshine Girls', images: img_sunsh_girls },
+];
 
 ---
 
@@ -17,9 +57,9 @@ import ShowcaseWrapper from '../components/ShowcaseWrapper.astro';
 <Header pageNumber={1}/>
 <HeroBackground/>
 <div class="container">
-    <div class="showcase-wrapper">
-        <ShowcaseWrapper/>
-    </div>
+    {food_showcases.map((showcase) => (
+        <ShowcaseWrapper title={showcase.title} images={showcase.images} />
+    ))}
 </div>
 </Layout>
 
@@ -29,19 +69,15 @@ import ShowcaseWrapper from '../components/ShowcaseWrapper.astro';
         width: 100%;
         height: auto;
         display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
         justify-content: center;
         align-items: center;
     }
     .showcase-wrapper {
-        
-         background-color: rgba(11, 13, 31, 0.7);
-        border: solid var(--faff-orange) 1px;
-        padding: 0rem;
-        z-index: 1;
-        border-radius: 2rem;
+        max-width: 80%;
     }
 </style>
-
 
 
 

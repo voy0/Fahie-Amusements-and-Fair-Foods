@@ -1,19 +1,42 @@
 --- 
 import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import Content from '../components/Content.astro';
-import Footer from "../components/Footer.astro";
 import Layout from '../layouts/Layout.astro';
 import HeroBackground from '../components/HeroBackgroundFixed.astro';
-import Placards from '../components/Placards.astro';
-//import { getEquipment } from '../utils/equipment.js';
+import ShowcaseWrapper from '../components/ShowcaseWrapper.astro';
 
-//const equipment = getEquipment();
+import kiddyStriker1 from '../assets/placards/kiddy_striker1.jpg';
+
+const img_kiddy_striker = [{ src: kiddyStriker1.src, alt: 'Kiddy Striker' }];
+
+const amusement_showcases = [
+    { title: 'Kiddy Striker', images: img_kiddy_striker },
+];
 
 ---
 
 <Layout>
 <Header pageNumber={2}/>
 <HeroBackground/>
-<Placards/>
+<div class="container">
+    {amusement_showcases.map((showcase) => (
+        <ShowcaseWrapper title={showcase.title} images={showcase.images} />
+    ))}
+</div>
 </Layout>
+
+<style>
+  .container {
+    margin-top: 10rem;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .showcase-wrapper {
+    flex: 1 1 40rem;
+    max-width: 55rem;
+  }
+</style>

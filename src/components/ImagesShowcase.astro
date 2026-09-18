@@ -47,7 +47,7 @@ const { images = [] as ImageItem[] } = Astro.props;
         const thumbnailIndex = index > activeIndex ? index - 1 : index;
         const distanceFromCenter = thumbnailIndex - center;
         const rotation = Math.max(-15, Math.min(15, distanceFromCenter * 7));
-        const horizontalOffset = distanceFromCenter * 4.2;
+        const horizontalOffset = distanceFromCenter * 6.2;
 
         card.classList.toggle('is-active', isActive);
         card.setAttribute('aria-pressed', String(isActive));
