@@ -3,15 +3,18 @@ import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 
 export default defineConfig({
-  site: 'https://fahieamusements.com', // Updated to your new custom domain!
+  site: 'https://fahieamusements.com',
   output: 'static',
   
   env: {
     schema: {},
   },
 
-  // Include Keystatic unconditionally so it deploys to production
-  integrations: [react(), keystatic()],
+  // FIX: Only load Keystatic in development mode
+  integrations: [
+    react(), 
+    process.env.NODE_ENV === 'development' ? keystatic() : null
+  ],
 
   vite: {
     server: {
@@ -19,7 +22,6 @@ export default defineConfig({
         allow: ['..']
       }
     },
-    // Fixes the blank white screen / lodash hydration error
     optimizeDeps: {
       include: ['lodash/debounce']
     }
