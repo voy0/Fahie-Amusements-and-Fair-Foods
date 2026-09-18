@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 import HeroBackground from '../components/HeroBackgroundFixed.astro';
 import ShowcaseWrapper from '../components/ShowcaseWrapper.astro';
+import Footer from '../components/Footer.astro';
 
 import friedDough from '../assets/placards/fried_dough.jpg';
 import friedDough1 from '../assets/placards/fried_dough1.jpg';
@@ -61,6 +62,7 @@ const food_showcases = [
         <ShowcaseWrapper title={showcase.title} images={showcase.images} />
     ))}
 </div>
+<Footer/>
 </Layout>
 
 <style>
