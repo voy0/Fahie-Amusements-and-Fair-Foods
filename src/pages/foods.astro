@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import Layout from '../layouts/Layout.astro';
 import HeroBackground from '../components/HeroBackgroundFixed.astro';
 import Placards from '../components/Placards.astro';
+import ShowcaseWrapper from '../components/ShowcaseWrapper.astro';
 //import { getEquipment } from '../utils/equipment.js';
 
 //const equipment = getEquipment();
@@ -15,5 +16,32 @@ import Placards from '../components/Placards.astro';
 <Layout>
 <Header pageNumber={1}/>
 <HeroBackground/>
-<Placards/>
+<div class="container">
+    <div class="showcase-wrapper">
+        <ShowcaseWrapper/>
+    </div>
+</div>
 </Layout>
+
+<style>
+    .container{
+        margin-top: 10rem;
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .showcase-wrapper {
+        
+         background-color: rgba(11, 13, 31, 0.7);
+        border: solid var(--faff-orange) 1px;
+        padding: 0rem;
+        z-index: 1;
+        border-radius: 2rem;
+    }
+</style>
+
+
+
+

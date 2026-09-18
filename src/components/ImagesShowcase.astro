@@ -1,0 +1,203 @@
+---
+interface ImageItem {
+  src: string;
+  alt?: string;
+}
+
+const { images = [] as ImageItem[] } = Astro.props;
+---
+
+<div class="image-showcase" data-image-showcase>
+  {
+    images.length > 0 ? (
+      <div class="image-stage" aria-label="Image showcase">
+        {images.map((image: any, index: any) => (
+          <button
+            class:list={['image-card', { 'is-active': index === 0 }]}
+            type="button"
+            data-image-card
+            data-index={index}
+            aria-label={index === 0 ? `Viewing ${image.alt || 'showcase image'}` : `View ${image.alt || 'showcase image'}`}
+            aria-pressed={index === 0}
+            style={`--image-order: ${index};`}
+          >
+            <img src={image.src} alt={image.alt || 'Showcase image'} loading={index === 0 ? 'eager' : 'lazy'} />
+          </button>
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">No images available.</p>
+    )
+  }
+</div>
+
+<script>
+  const showcases = document.querySelectorAll<HTMLElement>('[data-image-showcase]');
+
+  showcases.forEach((showcase) => {
+    const cards = Array.from(showcase.querySelectorAll<HTMLButtonElement>('[data-image-card]'));
+    let activeIndex = 0;
+
+    const positionCards = () => {
+      const thumbnailCount = Math.max(cards.length - 1, 1);
+      const center = (thumbnailCount - 1) / 2;
+
+      cards.forEach((card, index) => {
+        const isActive = index === activeIndex;
+        const thumbnailIndex = index > activeIndex ? index - 1 : index;
+        const distanceFromCenter = thumbnailIndex - center;
+        const rotation = Math.max(-15, Math.min(15, distanceFromCenter * 7));
+        const horizontalOffset = distanceFromCenter * 4.2;
+
+        card.classList.toggle('is-active', isActive);
+        card.setAttribute('aria-pressed', String(isActive));
+        card.setAttribute('aria-label', `${isActive ? 'Viewing' : 'View'} ${card.querySelector('img')?.alt || 'showcase image'}`);
+        card.style.setProperty('--image-order', String(isActive ? cards.length : index));
+        card.style.setProperty('--thumbnail-index', String(thumbnailIndex));
+        card.style.setProperty('--thumbnail-offset', `${horizontalOffset}rem`);
+        card.style.setProperty('--thumbnail-rotation', `${rotation}deg`);
+      });
+    };
+
+    cards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        if (index === activeIndex) return;
+        activeIndex = index;
+        positionCards();
+      });
+    });
+
+    positionCards();
+  });
+</script>
+
+<style>
+  .image-showcase {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    display: grid;
+    place-items: center;
+  
+  }
+
+  .image-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    isolation: isolate;
+  }
+
+  .image-card {
+    position: absolute;
+    top: var(--main-bottom, 80%);
+    left: 50%;
+    width: min(72%, 30rem);
+    height: 40%;
+    margin: 0;
+    padding: 0;
+    border: 0.2rem solid var(--faff-orange);
+    border-radius: 1rem;
+    overflow: hidden;
+    background: var(--faff-darkblue);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transform:
+      translate3d(-50%, -50%, 0)
+      translateX(var(--thumbnail-offset, 0rem))
+      rotate(var(--thumbnail-rotation, 0deg))
+      scale(0.34);
+    transform-origin: center center;
+    opacity: 0.84;
+    z-index: var(--image-order);
+    transition:
+      transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 350ms ease,
+      box-shadow 350ms ease;
+    will-change: transform;
+  }
+
+  .image-card.is-active {
+    top: 0;
+    z-index:-1;
+    width: min(100%, 60rem);
+    height: 68%;
+    cursor: default;
+    transform: translate3d(-50%, 0, 0);
+    opacity: 1;
+    box-shadow: 0 1.2rem 2.5rem rgba(0, 0, 0, 0.38);
+  }
+
+  .image-card:not(.is-active):hover,
+  .image-card:not(.is-active):focus-visible {
+    transform:
+      translate3d(-50%, calc(-50% - 1rem), 0)
+      translateX(var(--thumbnail-offset, 0rem))
+      rotate(var(--thumbnail-rotation, 0deg))
+      scale(0.4);
+    opacity: 1;
+    z-index: 100;
+    box-shadow: 0 1rem 1.75rem rgba(0, 0, 0, 0.45);
+  }
+
+  .image-card:focus-visible {
+    outline: 0.2rem solid var(--faff-orange);
+    outline-offset: 0.25rem;
+  }
+
+  .image-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .empty-state {
+    margin: 0;
+    color: #666;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .image-showcase,
+    .image-stage {
+      min-height: 18rem;
+    }
+
+    .image-card {
+      width: min(74%, 16rem);
+      height: 62%;
+      transform:
+        translate3d(-50%, -50%, 0)
+        translateX(calc(var(--thumbnail-offset, 0rem) * 0.55))
+        rotate(var(--thumbnail-rotation, 0deg))
+        scale(0.34);
+    }
+
+    .image-card.is-active {
+      top: 0;
+      width: 92%;
+      height: 62%;
+    }
+
+    .image-card:not(.is-active) {
+      top: 62%;
+    }
+
+    .image-card:not(.is-active):hover,
+    .image-card:not(.is-active):focus-visible {
+      transform:
+        translate3d(-50%, calc(-50% - 1rem), 0)
+        translateX(calc(var(--thumbnail-offset, 0rem) * 0.55))
+        rotate(var(--thumbnail-rotation, 0deg))
+        scale(0.4);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .image-card {
+      transition-duration: 0.01ms;
+    }
+  }
+</style>

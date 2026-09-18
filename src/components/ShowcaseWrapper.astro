@@ -1,0 +1,54 @@
+---
+import friedDough from '../assets/placards/fried_dough.jpg';
+import friedDough1 from '../assets/placards/fried_dough1.jpg';
+import friedDough2 from '../assets/placards/fried_dough2.jpg';
+
+const imageData = [
+    { src: friedDough.src, alt: 'Fried dough' },
+    { src: friedDough1.src, alt: 'Fried dough variation' },
+    { src: friedDough2.src, alt: 'Fried dough close-up' },
+];
+import ImageShowcase from './ImagesShowcase.astro';
+---
+
+<div class="showcase-wrapper">
+    <div class="images">
+      <ImageShowcase images={imageData} />
+      </div>
+  <div class="tagline">
+    <h1>Fried Dough</h1>
+  </div>
+</div>
+
+<style>
+    .tagline {
+    margin: 2rem 0 1rem 0;
+    order: 1;
+    text-align: center;
+    line-height: 150%;
+    font-weight: 200;
+    letter-spacing: 0.2rem;
+    font-family: var(--coiny);
+    text-shadow: 0 0 5px var(--faff-orange),
+                 0 0 10px var(--faff-orange),
+                 0 0 15px var(--faff-orange);
+  }
+
+  .showcase-wrapper {
+    position: relative;
+    width: 50vw;
+    scale: 0.8;
+    
+    display: flex;
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .images {
+    order: 2;
+    width: 35vw;
+    height: 35vw;
+  }
+</style>
