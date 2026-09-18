@@ -50,7 +50,7 @@ const {
 
 <style>
     :root{
-        --event-size: 5rem;
+        --event-size: 6rem;
         --event-font-size: calc(0.1 * var(--event-size));
     }
     .event{
@@ -61,7 +61,7 @@ const {
         width: 100%;
         height: var(--event-size);
         background-color: var(--bg-blue);
-        border-radius: 1.25rem;
+        border-radius: 1.2rem;
         overflow: hidden;
         display: flex;
         transition: filter 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
@@ -73,9 +73,7 @@ const {
     }
 
     .event.upcoming-next {
-        border-color: var(--faff-orange);
         box-shadow: 0 0 5px var(--faff-orange),
-                 0 0 10px var(--faff-orange),
                  0 0 15px var(--faff-orange);
     }
 
@@ -166,7 +164,11 @@ const {
     }
     @media (max-width: 600px){
         :root{
-            --event-size: 10rem;
+            --event-size: 12.5em;
+        }
+        .event{
+            margin-bottom: 2rem;
+            border-radius: 2rem;
         }
     }
 </style>

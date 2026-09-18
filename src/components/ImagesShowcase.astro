@@ -72,6 +72,7 @@ const { images = [] as ImageItem[] } = Astro.props;
 </script>
 
 <style>
+
   .image-showcase {
     width: 100%;
     min-width: 0;
@@ -160,17 +161,20 @@ const { images = [] as ImageItem[] } = Astro.props;
   }
 
   @media (max-width: 600px) {
+    :root{
+        --thumbnail-offset: 50rem;
+    }
     .image-showcase,
     .image-stage {
-      min-height: 18rem;
+      height: 100%;
     }
 
     .image-card {
-      width: min(74%, 16rem);
-      height: 62%;
+      width: min(74%, 40rem);
+      height: 52%;
       transform:
         translate3d(-50%, -50%, 0)
-        translateX(calc(var(--thumbnail-offset, 0rem) * 0.55))
+        translateX(calc(var(--thumbnail-offset, 0rem) * 2))
         rotate(var(--thumbnail-rotation, 0deg))
         scale(0.34);
     }
@@ -183,6 +187,7 @@ const { images = [] as ImageItem[] } = Astro.props;
 
     .image-card:not(.is-active) {
       top: 62%;
+      width: 80%;
     }
 
     .image-card:not(.is-active):hover,
@@ -198,6 +203,8 @@ const { images = [] as ImageItem[] } = Astro.props;
   @media (prefers-reduced-motion: reduce) {
     .image-card {
       transition-duration: 0.01ms;
+     
     }
+
   }
 </style>

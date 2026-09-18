@@ -1,10 +1,11 @@
 ---
 interface Props {
   showLogo?: boolean;
+  hideAfter?: boolean;
   pageNumber?: number;
 }
 
-const { showLogo = true, pageNumber = -1 } = Astro.props;
+const { showLogo = true, hideAfter = false, pageNumber = -1 } = Astro.props;
 const contactHref = Astro.url.pathname === '/' ? '#contact-form' : '/#contact-form';
 const shouldAutoHide = Astro.url.pathname !== '/';
 
@@ -19,7 +20,7 @@ const rightItems = navItems.slice(3);
 import ContactButton from './ContactButton.astro';
 ---
 
-<div class="header" class:list={{ 'auto-hide-header': shouldAutoHide }}>
+<div class="header" class:list={{ 'auto-hide-header': shouldAutoHide, 'hide-after': hideAfter }}>
   <nav class="header-item nav-items-left hide-on-mobile" aria-label="Primary navigation">
     {
       leftItems.map((item) => (
@@ -102,6 +103,11 @@ import ContactButton from './ContactButton.astro';
       justify-content: center;
       z-index: 999;
     }
+    
+
+    .header.hide-after:after {
+      display: none;
+    }
 
     .header.auto-hide-header {
       position: fixed;
@@ -110,6 +116,17 @@ import ContactButton from './ContactButton.astro';
       transition: transform 0.25s ease;
       transition-property: transform, background-color;
     }
+    .header.auto-hide-header:after{ 
+      z-index: -1;  
+      position:absolute;
+      content: '';
+      bottom: 0;
+      height: 100%;
+      width: 100%;
+       background-color: rgba(11, 13, 31, 0.7);
+    }
+    
+    
 
     .header.auto-hide-header.is-scrolling {
       --header-bg-opacity: 1;

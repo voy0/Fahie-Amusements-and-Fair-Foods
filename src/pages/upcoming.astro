@@ -15,7 +15,21 @@ import Events from '../components/Events.astro';
 
 <Layout>
     <Header pageNumber={4}/>
+    <div class="events">
     <Events/>
+    </div>
 <HeroBackground/>
 <Footer/>
 </Layout>
+
+<style>
+    .events {
+        margin-top: 10rem;
+    }
+    @media (max-width: 600px) {
+        .events {
+            min-height: 80vh;
+            margin-top: 15rem;
+        }
+    }
+</style>
