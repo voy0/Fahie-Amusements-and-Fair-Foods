@@ -13,7 +13,7 @@ export default defineConfig({
   // FIX: Only load Keystatic in development mode
   integrations: [
     react(), 
-    keystatic() // Always run the integration so the dashboard builds
+    process.env.NODE_ENV === 'development' ? keystatic() : null
   ],
 
   vite: {
