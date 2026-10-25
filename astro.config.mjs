@@ -13,7 +13,7 @@ export default defineConfig({
   // FIX: Only load Keystatic in development mode
   integrations: [
     react(), 
-    keystatic()
+    process.env.NODE_ENV === 'development' ? keystatic() : null
   ],
 
   vite: {
