@@ -1,22 +1,26 @@
 ---
 // src/components/Footer.astro
+import ContactButton from "./ContactButton.astro";
+const contactHref = Astro.url.pathname === '/' ? '#contact-form' : '/#contact-form';
+
 ---
 
 <footer class="footer-container">
   <div class="footer-content">
-    
     <!-- Column 1: Brand & Contact -->
-     <div class="footer-column">
+    <div class="footer-column">
       <div class="logo">
-      <a href={import.meta.env.BASE_URL}>
-        <img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
-      </a>
+        <a href={import.meta.env.BASE_URL}>
+          <img src="fafficon.svg" alt="Fahie Amusements & Fair Foods home" />
+        </a>
+      </div>
     </div>
-     </div>
     <div class="footer-column">
       <h3>Fahie Amusements & Fair Foods</h3>
       <p>Serving New England with Fun & Flavor!</p>
-      <a href="mailto:thefahies@fahieamusements.com" class="contact-link">thefahies@fahieamusements.com</a>
+      <a href="mailto:thefahies@fahieamusements.com" class="contact-link"
+        >thefahies@fahieamusements.com</a
+      >
     </div>
 
     <!-- Column 2: Quick Links -->
@@ -27,23 +31,44 @@
       <a href={`${import.meta.env.BASE_URL}upcoming`}>Upcoming Events</a>
       <a href={`${import.meta.env.BASE_URL}about`}>About Us</a>
     </div>
-
+<div class="footer-column contact-us">
+      <ContactButton href={contactHref} >Contact us!</ContactButton>
+    </div>
     <!-- Column 3: Socials -->
     <div class="footer-column">
       <h3>Follow Us</h3>
-      <a href="https://www.facebook.com/profile.php?id=100084158719843">Facebook</a>
-      <a href="#">Instagram</a>
+      <a
+        class="social-link"
+        href="https://www.facebook.com/profile.php?id=100084158719843"
+        aria-label="Facebook"
+      >
+        <svg
+          class="social-icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M14 8h3V4h-3c-3.3 0-5 1.7-5 5v3H6v4h3v8h4v-8h3l1-4h-4V9c0-.7.3-1 1-1Z"
+            fill="currentColor"></path>
+        </svg>
+      </a>
     </div>
 
+    <!-- Column 4: Contact -->
+    
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; {new Date().getFullYear()} Fahie Amusements & Fair Foods. All rights reserved.</p>
+    <p>
+      &copy; {new Date().getFullYear()} Fahie Amusements & Fair Foods. All rights
+      reserved.
+    </p>
   </div>
 </footer>
 
 <style>
-  .logo a img{
+  .logo a img {
     width: 10rem;
   }
   .footer-container {
@@ -71,7 +96,7 @@
 
   .footer-column {
     z-index: 100;
-    
+
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -105,6 +130,25 @@
     font-weight: bold;
   }
 
+  .social-icon {
+    width: 4rem;
+    height: 4rem;
+    color: var(--faff-orange);
+    background: transparent;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 0.75rem;
+    background-color: rgba(0, 0, 0, 0.35);
+  }
+
+ 
+
   .footer-bottom {
     z-index: 100;
 
@@ -115,9 +159,31 @@
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.5);
   }
-  @media(max-width: 600px){
-    div{
+  .contact-us{
+    align-items: center;
+    justify-content: center;
+  }
+  @media (max-width: 600px) {
+    .footer-column{
+      padding: 3rem 0;
+    }
+    .social-link {
+      font-size: 1.5em;
+      width: 9rem;
+      height: 9rem;
+    }
+    .footer-container {
+      padding: 10rem 3rem 1rem 3rem;
+    }
+    .logo a img {
+      width: 20rem;
+    }
+    div {
       font-size: 3rem;
+    }
+    .footer-bottom{
+      
+      font-size: 2rem;
     }
   }
 </style>
