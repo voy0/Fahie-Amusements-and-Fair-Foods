@@ -30,9 +30,10 @@ const marqueeItems = [...items, ...items];
   .banner {
     z-index: 100;
     width: 100%;
+    font-size: var(--fs2);
     height: var(--fs3);
     overflow: hidden;
-    background: #d62828;
+    background: #b62626;
     color: #fff;
     display: flex;
     align-items: center;
@@ -50,7 +51,6 @@ const marqueeItems = [...items, ...items];
   .banner-item {
     padding: 0 2rem;
     height: 100%;
-    font-size: var(--fs2);
     font-weight: 600;
     font-family: var(--comfortaa);
     letter-spacing: 0.08em;
@@ -69,10 +69,11 @@ const marqueeItems = [...items, ...items];
   }
   @media (max-width: 600px) {
     .banner {
-      height: 5rem;
+      height: var(--fs5);
     }
     .banner-item {
-      font-size: 4rem;
+      font-size: var(--fs4);
+      font-weight: 800;
       padding: 0 4rem;
     }
   }

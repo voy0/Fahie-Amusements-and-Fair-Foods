@@ -34,10 +34,14 @@
     --faff-darkblue: rgb(20, 20, 40);
     --bg-blue: rgb(18, 21, 43);
     --fs1: 0.6rem;
-    --fs2: 0.9rem;
-    --fs3: 1.2rem;
-    --fs4: 2.5rem;
-    --fs5: 2.8rem;
+    --fs2: 1rem;
+    --fs3: 1.6rem;
+    --fs4: 2.6rem;
+    --fs5: 4.25rem;
+    --fs6: 6.9rem;
+    --fs7: 10.5rem;
+    --fs8: 16.5rem;
+    --fs9: 25.5rem;
   }
   
   html,
@@ -62,6 +66,11 @@
   @media (min-width: 1200px){
       html {
         font-size: clamp(8px, 0.9em, 16px);
+      }
+  }
+  @media(max-height: 650px){
+      html {
+        font-size: 3px;
       }
   }
 </style>

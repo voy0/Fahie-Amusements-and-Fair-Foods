@@ -9,7 +9,7 @@ import ContactButton from './ContactButton.astro'
           <input type="hidden" name="access_key" value="53406a58-4b9c-4851-854a-7cd3806f89f4">
 
         <div class="headline">
-          <h2>Contact us</h2>
+          <div class="h2">Contact us</div>
           <span>Fill out the form and we'll get back to you shortly.</span>
         </div>
 
@@ -53,7 +53,7 @@ import ContactButton from './ContactButton.astro'
 
     <aside class="info-column" aria-label="Business contact">
       <div class="owner-card">
-        <h3>Fahie Amusements & Fair Foods</h3>
+        <div class="h3">Fahie Amusements & Fair Foods</div>
         <p class="owner-name">Client Success Management</p>
         <p class="owner-phone"><a href="mailto:thefahies@fahieamusements.com">thefahies@fahieamusements.com</a></p>
 
@@ -139,13 +139,22 @@ import ContactButton from './ContactButton.astro'
     
     --form-scale: 1;
   }
-  
+  .h2{
+    font-size: var(--fs3);
+    font-weight: 800;
+    padding: 0.75rem 0;
+  }
+  .h3{
+    font-size: var(--fs2);
+    font-weight: 800;
+    padding: 0.75rem 0;
+  }
   .wrapper{
     z-index: 100;
     min-width: calc(40% * var(--form-scale));
     max-width: calc(70% * var(--form-scale));
     height: calc(40% * var(--form-scale));
-    border-radius: 1.25rem;
+    border-radius: 10px;
     border: 1px solid var(--faff-orange);
     background-color: var(--faff-darkblue);
     /* background: linear-gradient(180deg, var(--accent1), var(--accent2)); */
@@ -274,7 +283,7 @@ import ContactButton from './ContactButton.astro'
   /* adjust ContactButton spacing inside actions */
   .actions :is(button, .button, a){
     margin: 0;
-    font-size: var(--fs3);
+    font-size: var(--fs2);
     width: max-content;
   }
 
@@ -314,20 +323,27 @@ import ContactButton from './ContactButton.astro'
   .owner-name{ font-weight:400; margin:0 0 0.35rem 0; }
   .owner-phone a{ color: var(--faff-orange); font-weight:700; text-decoration:none; }
   .note{ margin-top:0.6rem; color: rgba(255,255,255,0.9);  }
-  label {font-size: var(--fs1);}
 
   @media (max-width: 600px){
+    
     .actions :is(button, .button, a) {
-      font-size: var(--fs4);
-    }
-    .wrapper{ width: 100%;
-    font-size: var(--fs5);
-  padding: 2rem;}
-    .headline h2 {
       font-size: var(--fs5);
     }
+    .actions{ padding-top: 2rem; }
+    .wrapper{ max-width: 95%;
+      width: 95%;
+    font-size: var(--fs5);
+  padding: 2rem;}
+    .h2{
+      font-size: var(--fs5);
+      padding: 2.5rem 0 ;
+    }
+    .h3{
+      font-size: var(--fs5);
+      padding: 3rem 0 4rem 0;
+    }
     .headline span{
-      font-size: var(--fs4);
+      font-size: var(--fs5);
     }
     .contact-container{ flex-direction:column; }
     .form-column, .info-column{
@@ -338,15 +354,19 @@ import ContactButton from './ContactButton.astro'
     .form-column{
       font-size: var(--fs5);
     }
-    .field-wrapper{ grid-template-columns: 1fr;  }
+    .field-wrapper{ grid-template-columns: 1fr;  
+    padding: 1rem 0 ;}
     .field-wrapper *{font-size: var(--fs5);}
     .separator{ display:none; }
-    .label{ margin-bottom:0.25rem; justify-self:start; }
-    .info-column{flex-wrap:nowrap;}
+    .label{ margin-bottom:0.25rem;  justify-self:start; }
+    .info-column{flex-wrap:wrap;}
     .actions{flex: 1 1 100%; justify-content:center; }
     .textfield input,
   .textfield textarea{
     font-size: var(--fs5);
+  }
+  .owner-card{
+    padding: 0 0 0 2rem;
   }
   }
 </style>
