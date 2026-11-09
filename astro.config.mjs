@@ -6,7 +6,7 @@ import netlify from '@astrojs/netlify';
 
 export default defineConfig({
   site: 'https://fahieamusements.com',
-  output: 'hybrid',
+  output: 'static',
 
   env: {
     schema: {},
