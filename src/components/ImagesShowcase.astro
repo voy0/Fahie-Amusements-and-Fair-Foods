@@ -19,7 +19,7 @@ const { images = [] as ImageItem[] } = Astro.props;
             data-index={index}
             aria-label={index === 0 ? `Viewing ${image.alt || 'showcase image'}` : `View ${image.alt || 'showcase image'}`}
             aria-pressed={index === 0}
-            style={`--image-order: ${index};`}
+            style={`--image-order: ${index === 0 ? 0 : images.length - index};`}
           >
             <img src={image.src} alt={image.alt || 'Showcase image'} loading={index === 0 ? 'eager' : 'lazy'} />
           </button>
@@ -47,12 +47,12 @@ const { images = [] as ImageItem[] } = Astro.props;
         const thumbnailIndex = index > activeIndex ? index - 1 : index;
         const distanceFromCenter = thumbnailIndex - center;
         const rotation = Math.max(-15, Math.min(15, distanceFromCenter * 7));
-        const horizontalOffset = distanceFromCenter * 6.2;
+        const horizontalOffset = distanceFromCenter * 4;
 
         card.classList.toggle('is-active', isActive);
         card.setAttribute('aria-pressed', String(isActive));
         card.setAttribute('aria-label', `${isActive ? 'Viewing' : 'View'} ${card.querySelector('img')?.alt || 'showcase image'}`);
-        card.style.setProperty('--image-order', String(isActive ? cards.length : index));
+        card.style.setProperty('--image-order', String(isActive ? 0 : cards.length - thumbnailIndex));
         card.style.setProperty('--thumbnail-index', String(thumbnailIndex));
         card.style.setProperty('--thumbnail-offset', `${horizontalOffset}rem`);
         card.style.setProperty('--thumbnail-rotation', `${rotation}deg`);
@@ -91,40 +91,36 @@ const { images = [] as ImageItem[] } = Astro.props;
 
   .image-card {
     position: absolute;
-    top: var(--main-bottom, 80%);
+    top: 0;
     left: 50%;
-    width: min(72%, 30rem);
-    height: 40%;
+    width: min(100%, 60rem);
+    height: 68%;
     margin: 0;
     padding: 0;
     border: 0.2rem solid var(--faff-orange);
     border-radius: 1rem;
     overflow: hidden;
     background: var(--faff-darkblue);
-    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.3);
+    box-shadow: 1rem 1rem 4rem rgba(0, 0, 0, 1);
     cursor: pointer;
     transform:
-      translate3d(-50%, -50%, 0)
+      translate3d(-50%, calc(75% + 1rem), 0)
       translateX(var(--thumbnail-offset, 0rem))
       rotate(var(--thumbnail-rotation, 0deg))
-      scale(0.34);
+      scale(0.5);
     transform-origin: center center;
-    opacity: 0.84;
+    opacity: 1;
     z-index: var(--image-order);
     transition:
       transform 650ms cubic-bezier(0.22, 1, 0.36, 1),
       opacity 350ms ease,
-      box-shadow 350ms ease;
+      box-shadow 650ms cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform;
   }
 
   .image-card.is-active {
-    top: 0;
-    z-index:-1;
-    width: min(100%, 60rem);
-    height: 68%;
     cursor: default;
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0) scale(1);
     opacity: 1;
     box-shadow: 0 1.2rem 2.5rem rgba(0, 0, 0, 0.38);
   }
@@ -132,13 +128,13 @@ const { images = [] as ImageItem[] } = Astro.props;
   .image-card:not(.is-active):hover,
   .image-card:not(.is-active):focus-visible {
     transform:
-      translate3d(-50%, calc(-50% - 1rem), 0)
+      translate3d(-50%, calc(68% + 1rem), 0)
       translateX(var(--thumbnail-offset, 0rem))
       rotate(var(--thumbnail-rotation, 0deg))
-      scale(0.4);
+      scale(0.55);
     opacity: 1;
     z-index: 100;
-    box-shadow: 0 1rem 1.75rem rgba(0, 0, 0, 0.45);
+
   }
 
   .image-card:focus-visible {
@@ -162,7 +158,8 @@ const { images = [] as ImageItem[] } = Astro.props;
 
   @media (max-width: 600px) {
     :root{
-        --thumbnail-offset: 50rem;
+        --thumbnail-offset: 1rem;
+
     }
     .image-showcase,
     .image-stage {
@@ -170,30 +167,22 @@ const { images = [] as ImageItem[] } = Astro.props;
     }
 
     .image-card {
-      width: min(74%, 40rem);
-      height: 52%;
       transform:
-        translate3d(-50%, -50%, 0)
+        translate3d(-50%, calc(72% + 1rem), 0)
         translateX(calc(var(--thumbnail-offset, 0rem) * 2))
         rotate(var(--thumbnail-rotation, 0deg))
         scale(0.34);
     }
 
     .image-card.is-active {
-      top: 0;
-      width: 92%;
-      height: 62%;
-    }
-
-    .image-card:not(.is-active) {
-      top: 62%;
-      width: 80%;
+      width: 100%;
+      transform: translate3d(-50%, 0, 0) scale(1);
     }
 
     .image-card:not(.is-active):hover,
     .image-card:not(.is-active):focus-visible {
       transform:
-        translate3d(-50%, calc(-50% - 1rem), 0)
+        translate3d(-50%, calc(65% + 1rem), 0)
         translateX(calc(var(--thumbnail-offset, 0rem) * 0.55))
         rotate(var(--thumbnail-rotation, 0deg))
         scale(0.4);
@@ -203,7 +192,7 @@ const { images = [] as ImageItem[] } = Astro.props;
   @media (prefers-reduced-motion: reduce) {
     .image-card {
       transition-duration: 0.01ms;
-     
+
     }
 
   }

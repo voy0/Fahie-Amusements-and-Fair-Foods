@@ -9,7 +9,7 @@ import kiddyStriker1 from '../assets/placards/kiddy_striker1.jpg';
 const img_kiddy_striker = [{ src: kiddyStriker1.src, alt: 'Kiddy Striker' }];
 
 const amusement_showcases = [
-    { title: 'Kiddy Striker', images: img_kiddy_striker },
+    { title: 'Kiddy Striker', subtitle: 'Blow up toys, winner every time!', images: img_kiddy_striker },
 ];
 
 ---
@@ -19,7 +19,7 @@ const amusement_showcases = [
 <HeroBackground/>
 <div class="container">
     {amusement_showcases.map((showcase) => (
-        <ShowcaseWrapper title={showcase.title} images={showcase.images} />
+        <ShowcaseWrapper title={showcase.title} subtitle={showcase.subtitle} images={showcase.images} />
     ))}
 </div>
 </Layout>

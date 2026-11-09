@@ -8,10 +8,11 @@ interface ImageItem {
 
 interface Props {
   title: string;
+  subtitle?: string;
   images: ImageItem[];
 }
 
-const { title, images } = Astro.props;
+const { title, subtitle, images } = Astro.props;
 ---
 
 <article class="showcase-wrapper">
@@ -20,6 +21,7 @@ const { title, images } = Astro.props;
   </div>
   <div class="tagline">
     <h1>{title}</h1>
+    {subtitle && <p>{subtitle}</p>}
   </div>
 </article>
 
@@ -41,22 +43,77 @@ const { title, images } = Astro.props;
   }
 
   .tagline {
+    font-size: var(--fs3);
     order: 0;
     margin: 2rem 0 1rem;
     text-align: center;
     line-height: 150%;
-    font-weight: 200;
+    font-weight: 100;
     letter-spacing: 0.2rem;
     font-family: var(--coiny);
     text-shadow: 0 0 5px var(--faff-orange),
       0 0 10px var(--faff-orange),
       0 0 15px var(--faff-orange);
+      
+    /* FIX: Traps the absolute blob inside this specific div and creates a stacking context */
+    position: relative;
+    z-index: 1;
+  }
+  .tagline::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 80%;
+    height: 100%;
+    
+    background-color: rgb(0, 0, 0); /* Change back to var(--faff-orange) when you're ready! */
+    opacity: 1; 
+    filter: blur(4rem); 
+    
+    border-radius: 50%;
+    /* Pushes it behind the text, but stays above the page background because of the parent's z-index: 1 */
+    z-index: -1; 
+  }
+
+  .tagline h1,
+  .tagline p {
+    margin: 0;
+  }
+
+  .tagline p {
+    margin-top: 1.3rem;
+    font-family: var(--comfortaa);
+    font-wegith: 600;
+    font-size: 1em;
+    text-shadow: bold 0 0 5px var(--faff-orange),
+      0 0 10px var(--faff-orange),
+      0 0 15px var(--faff-orange);
+    letter-spacing: 0.08rem;
+    line-height: 120%;
   }
 
   @media (max-width: 600px) {
     .images {
       width: 85vw;
       height: 85vw;
+
+    }
+    .showcase-wrapper {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+    .tagline{
+      width: 90%;
+      
+      font-size: var(--fs5);
+    }
+    .tagline p {
+      font-size: 0.8em;
+      margin-top: 4rem;
+      line-height: 140%;
     }
   }
 </style>
