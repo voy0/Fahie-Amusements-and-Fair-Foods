@@ -159,7 +159,6 @@ const { images = [] as ImageItem[] } = Astro.props;
   @media (max-width: 600px) {
     :root{
         --thumbnail-offset: 1rem;
-
     }
     .image-showcase,
     .image-stage {
@@ -171,7 +170,7 @@ const { images = [] as ImageItem[] } = Astro.props;
 
       transform:
         translate3d(-50%, calc(72% + 1rem), 0)
-        translateX(calc(var(--thumbnail-offset, 0rem) * 2))
+        translateX(calc(var(--thumbnail-offset, 0rem) * 3))
         rotate(var(--thumbnail-rotation, 0deg))
         scale(0.34);
     }
