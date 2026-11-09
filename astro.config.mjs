@@ -2,10 +2,12 @@ import { defineConfig } from "astro/config";
 import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 
+import netlify from '@astrojs/netlify';
+
 export default defineConfig({
   site: 'https://fahieamusements.com',
-  output: 'static',
-  
+  output: 'hybrid',
+
   env: {
     schema: {},
   },
@@ -13,7 +15,8 @@ export default defineConfig({
   // FIX: Only load Keystatic in development mode
   integrations: [
     react(), 
-    process.env.NODE_ENV === 'development' ? keystatic() : null
+    keystatic()
+    //process.env.NODE_ENV === 'development' ? keystatic() : null
   ],
 
   vite: {
@@ -25,5 +28,7 @@ export default defineConfig({
     optimizeDeps: {
       include: ['lodash/debounce']
     }
-  }
+  },
+
+  adapter: netlify()
 });
