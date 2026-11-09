@@ -138,15 +138,15 @@ const contentParagraphs = [
         float: right;
     }
     .content{
-        font-size: 1.1rem;
+        font-size: var(--fs3);
         font-weight: 400;
         text-align: justify;
-        line-height: 2rem;
+        line-height: 2.5rem;
         text-shadow: 1px 1px 2px var(--faff-orange);
     }
     
     .quote{
-        font-size: 0.85rem;
+        font-size: 0.85em;
         font-weight: 200;
         color: rgba(255, 255, 255, 0.926);
         font-style: italic;
@@ -164,7 +164,7 @@ const contentParagraphs = [
             width: 60%;
         }
         .quote{
-            font-size: 1em;
+            font-size: 0.8em;
         }
     }
     @media (max-width: 600px){
@@ -177,7 +177,7 @@ const contentParagraphs = [
         .paragraphWrapper{
             float: none;
             padding: 4rem;
-            
+            border-radius: 4rem;
         }
         .paragraphWrapper .content img{
             float: none;
@@ -187,12 +187,12 @@ const contentParagraphs = [
             max-width: 100%;
         }
         .content{
-            font-size: 3.2rem;
-            line-height: 4rem;
+            font-size: var(--fs5);
+            line-height: 6rem;
             font-weight: 100;
         }
         .quote{
-            font-size: 1em;
+            font-size: 0.8em;
         }
     }
 </style>
