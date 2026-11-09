@@ -1,0 +1,139 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import HeroBackground from '../components/HeroBackgroundFixed.astro';
+import Layout from '../layouts/Layout.astro';
+import privacyPolicy from '../assets/privacy_policy.md?raw';
+
+const escapeHtml = (value: string) =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const formatInlineMarkdown = (value: string) =>
+  escapeHtml(value)
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+const renderMarkdown = (markdown: string) => {
+  const lines = markdown.split(/\r?\n/);
+  const output: string[] = [];
+  let paragraph: string[] = [];
+  let list: string[] = [];
+
+  const flushParagraph = () => {
+    if (paragraph.length > 0) {
+      output.push(`<p>${formatInlineMarkdown(paragraph.join(' '))}</p>`);
+      paragraph = [];
+    }
+  };
+
+  const flushList = () => {
+    if (list.length > 0) {
+      output.push(`<ul>${list.map((item) => `<li>${formatInlineMarkdown(item)}</li>`).join('')}</ul>`);
+      list = [];
+    }
+  };
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (!trimmed) {
+      flushParagraph();
+      flushList();
+    } else if (/^#{1,6}\s/.test(trimmed)) {
+      flushParagraph();
+      flushList();
+      const headingMatch = trimmed.match(/^(#{1,6})\s+(.+)$/);
+      if (headingMatch) {
+        const [, hashes, heading] = headingMatch;
+        output.push(`<h${hashes.length}>${formatInlineMarkdown(heading)}</h${hashes.length}>`);
+      }
+    } else if (/^---+$/.test(trimmed)) {
+      flushParagraph();
+      flushList();
+      output.push('<hr />');
+    } else if (/^(?:\*|-)\s+/.test(trimmed)) {
+      flushParagraph();
+      list.push(trimmed.replace(/^(?:\*|-)\s+/, ''));
+    } else {
+      flushList();
+      paragraph.push(trimmed);
+    }
+  }
+
+  flushParagraph();
+  flushList();
+  return output.join('\n');
+};
+
+const policyHtml = renderMarkdown(privacyPolicy);
+---
+
+<Layout>
+  <Header />
+  <HeroBackground />
+  <main class="policy-page">
+    <article class="policy-content" set:html={policyHtml}></article>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .policy-page {
+    position: relative;
+    z-index: 2;
+    width: min(90%, 70rem);
+    margin: 8rem auto 0;
+    padding: 3rem 4rem;
+    border: 1px solid var(--faff-orange);
+    border-radius: 1.5rem;
+    background: rgba(11, 13, 31, 0.88);
+    color: white;
+    font-family: var(--comfortaa);
+    line-height: 1.7;
+  }
+
+  .policy-content :global(h1),
+  .policy-content :global(h2),
+  .policy-content :global(h3) {
+    color: var(--faff-orange);
+    font-family: var(--coiny);
+    line-height: 1.2;
+  }
+
+  .policy-content :global(h1) {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .policy-content :global(h2) {
+    margin-top: 2.5rem;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+  }
+
+  .policy-content :global(h3) {
+    margin-top: 1.75rem;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+  }
+
+  .policy-content :global(a) {
+    color: var(--faff-orange);
+  }
+
+  .policy-content :global(hr) {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    margin: 2rem 0;
+  }
+
+  .policy-content :global(ul) {
+    padding-left: 1.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .policy-page {
+      width: 80%;
+      margin-top: 15rem;
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>
